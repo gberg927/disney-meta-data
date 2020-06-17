@@ -1,7 +1,6 @@
 {
-  "name": "wdw-metadata-prisma-backend",
+  "name": "disney-metadata-backend",
   "version": "1.0.0",
-  "description": "WDW Metadata Prisma Backend",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,6 +9,10 @@
   },
   "author": "Dennis Glasberg <dennis.glasberg@gmail.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gberg927/disney-metadata-backend.git"
+  },
   "devDependencies": {
     "@prisma/cli": "^2.0.0",
     "babel-eslint": "^9.0.0",
