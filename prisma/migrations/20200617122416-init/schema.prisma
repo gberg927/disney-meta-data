@@ -1,0 +1,96 @@
+datasource db {
+  provider = "mysql"
+  url = "***"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Park {
+  id        Int      @id @default(autoincrement())
+  name      String
+  slug      String
+  latitude  Float
+  longitude Float
+  timezone  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Ride      Ride[]
+}
+
+enum RideCategory {
+  ARCADE
+  CHARACTER_MEET
+  PLAY_AREA
+  RIDE
+  SHOW_CONTINUOUS
+  SHOW_SCHEDULED
+  WALKTHROUGH
+}
+
+enum RideType {
+  ATTRACTION
+  ENTERTAINMENT
+}
+
+model Ride {
+  id                Int           @id @default(autoincrement())
+  name              String
+  slug              String
+  longId            String?
+  category          RideCategory?
+  type              RideType?
+  longitude         Float?
+  latitude          Float?
+  area              String?
+  openedOn          DateTime?
+  heightRestriction Int?
+  duration          Float?
+  fastPass          Boolean?
+  singleRider       Boolean?
+  riderSwap         Boolean?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  park              Park          @relation(fields: [parkId], references: [id])
+  parkId            Int
+  WaitTime          WaitTime[]
+}
+
+model WaitTime {
+  id        Int      @id @default(autoincrement())
+  timestamp DateTime
+  amount    Int
+  active    String
+  status    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ride      Ride     @relation(fields: [rideId], references: [id])
+  rideId    Int
+  Job       Job      @relation(fields: [jobId], references: [id])
+  jobId     Int
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Job       Job[]
+  WaitTime  WaitTime[]
+}
+
+model Job {
+  id        Int        @id @default(autoincrement())
+  startTime DateTime
+  endTime   DateTime
+  created   Int
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  user      User       @relation(fields: [userId], references: [id])
+  userId    Int
+  WaitTime  WaitTime[]
+}

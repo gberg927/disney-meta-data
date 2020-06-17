@@ -1,0 +1,29 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "Park",
+      "field": "updatedAt",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Ride",
+      "field": "updatedAt",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "WaitTime",
+      "field": "updatedAt",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Job",
+      "field": "updatedAt",
+      "arity": "Optional"
+    }
+  ]
+}
