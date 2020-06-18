@@ -33,7 +33,7 @@
         "source": "db"
       },
       "argument": "provider",
-      "value": "\"mysql\""
+      "value": "\"postgresql\""
     },
     {
       "tag": "CreateArgument",
@@ -163,7 +163,7 @@
       "model": "Park",
       "field": "updatedAt",
       "type": "DateTime",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -365,7 +365,7 @@
       "model": "Ride",
       "field": "updatedAt",
       "type": "DateTime",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -550,7 +550,7 @@
       "model": "WaitTime",
       "field": "updatedAt",
       "type": "DateTime",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -963,7 +963,7 @@
       "model": "Job",
       "field": "updatedAt",
       "type": "DateTime",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
