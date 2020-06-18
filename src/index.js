@@ -16,6 +16,8 @@ app.use('/api/jobs', jobs);
 app.use('/api/parks', parks);
 app.use('/api/rides', rides);
 
-app.listen({ port: 5000 }, () => {
-  console.log(`REST API: Listening: http://localhost:5000`);
+const PORT = process.env.PORT || 5000;
+
+app.listen({ port: PORT }, () => {
+  console.log(`REST API: Listening: http://localhost:${PORT}`);
 });
