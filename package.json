@@ -54,6 +54,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "nexus-prisma": "^0.14.0",
-    "slugify": "^1.4.0"
+    "slugify": "^1.4.0",
+    "themeparks": "^5.1.37"
   }
 }
