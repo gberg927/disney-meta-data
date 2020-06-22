@@ -20,10 +20,6 @@ let job = null;
 let waitTimesCreated = 0;
 
 const processWaitTime = async (ride, data) => {
-  console.log(
-    `${data.name}, ${data.id}, ${data.meta.area}, ${data.meta.latitude}, ${data.meta.longitude}, ${data.fastPass}`
-  );
-
   const waitTime = await prisma.waitTime.create({
     data: {
       timestamp,
@@ -56,7 +52,9 @@ const processWaitTime = async (ride, data) => {
   };
 
   waitTimesCreated += 1;
-  // console.log(`Created WaitTime: ${data.name} - ${data.waitTime} minutes wait (${data.status})`);
+  console.log(
+    `Created WaitTime: ${data.name} - ${data.waitTime} minutes wait (${data.status})`
+  );
 
   return processedWaitTime;
 };
@@ -77,16 +75,16 @@ const getParkRideTimes = async park => {
   let rideTimes = [];
   switch (park.slug) {
     case 'wdw-magic-kingdom':
-      // rideTimes = await GetWDWMagicKingdomWaitTimes();
+      rideTimes = await GetWDWMagicKingdomWaitTimes();
       break;
     case 'wdw-epcot':
-      // rideTimes = await GetWDWEpcotWaitTimes();
+      rideTimes = await GetWDWEpcotWaitTimes();
       break;
     case 'wdw-hollywood-studios':
-      // rideTimes = await GetWDWHollywoodStudiosWaitTimes();
+      rideTimes = await GetWDWHollywoodStudiosWaitTimes();
       break;
     case 'wdw-animal-kingdom':
-      // rideTimes = await GetWDWAnimalKingdomnWaitTimes();
+      rideTimes = await GetWDWAnimalKingdomnWaitTimes();
       break;
     case 'dr-magic-kingdom':
       rideTimes = await GetDRMagicKingdomWaitTimes();
@@ -98,13 +96,13 @@ const getParkRideTimes = async park => {
       rideTimes = await GetDPMagicKingdomWaitTimes();
       break;
     case 'dp-walt-disney-studios':
-      // rideTimes = await GetDPWaltDisneyStudiosWaitTimes();
+      rideTimes = await GetDPWaltDisneyStudiosWaitTimes();
       break;
     case 'hk-disneyland':
       rideTimes = await GetHKDisneylandWaitTimes();
       break;
     case 'sdr-magic-kingdom':
-      // rideTimes = await GetSDRMagicKingdomWaitTimes();
+      rideTimes = await GetSDRMagicKingdomWaitTimes();
       break;
     case 'tdr-magic-kingdom':
       rideTimes = await GetTDRMagicKingdomWaitTimes();
