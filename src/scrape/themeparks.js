@@ -119,13 +119,15 @@ const getParkRideTimes = async park => {
 const processPark = async park => {
   console.log(`Park: ${park.slug}`);
   const processedWaitTimes = [];
-  const rideTimes = await getParkRideTimes(park).catch(err =>
-    console.error(err)
-  );
 
-  for (const rideTime of rideTimes) {
-    const processedWaitTime = await processRide(rideTime);
-    processedWaitTimes.push(processedWaitTime);
+  try {
+    const rideTimes = await getParkRideTimes(park);
+    for (const rideTime of rideTimes) {
+      const processedWaitTime = await processRide(rideTime);
+      processedWaitTimes.push(processedWaitTime);
+    }
+  } catch (err) {
+    console.error(err);
   }
 
   const processedPark = {
