@@ -1,0 +1,119 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Park",
+      "field": "rides",
+      "type": "Ride",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Park",
+      "field": "Ride"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Ride",
+      "field": "waitTimes",
+      "type": "WaitTime",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Ride",
+      "field": "WaitTime"
+    },
+    {
+      "tag": "CreateField",
+      "model": "WaitTime",
+      "field": "job",
+      "type": "Job",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "WaitTime",
+          "field": "job"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "WaitTime",
+          "field": "job"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[jobId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "WaitTime",
+          "field": "job"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "WaitTime",
+      "field": "Job"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "WaitTime",
+      "field": "User"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "WaitTime",
+      "field": "userId"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "jobs",
+      "type": "Job",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "Job"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "WaitTime"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Job",
+      "field": "waitTimes",
+      "type": "WaitTime",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Job",
+      "field": "WaitTime"
+    }
+  ]
+}

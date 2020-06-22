@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -65,8 +65,8 @@ model WaitTime {
   status    String
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
-  ride      Ride?     @relation(fields: [rideId], references: [id])
-  rideId    Int?
+  ride      Ride      @relation(fields: [rideId], references: [id])
+  rideId    Int
   job       Job       @relation(fields: [jobId], references: [id])
   jobId     Int
 }
