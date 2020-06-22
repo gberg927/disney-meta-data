@@ -68,6 +68,9 @@ parks.get('/:parkId/rides/:rideId/waittimes', async (req, res) => {
         park: { id: parseInt(parkId) },
       },
     },
+    orderBy: {
+      timestamp: 'desc',
+    },
   });
   res.status(200).json({ waitTimes: rtnWaitTimes });
 });

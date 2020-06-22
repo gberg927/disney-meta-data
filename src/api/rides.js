@@ -44,6 +44,9 @@ rides.get('/:rideId/waittimes', async (req, res) => {
         id: parseInt(rideId),
       },
     },
+    orderBy: {
+      timestamp: 'desc',
+    },
   });
   res.status(200).json({ waitTimes: rtnWaitTimes });
 });
