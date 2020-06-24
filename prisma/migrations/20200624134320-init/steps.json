@@ -33,7 +33,7 @@
         "source": "db"
       },
       "argument": "provider",
-      "value": "\"postgresql\""
+      "value": "\"mysql\""
     },
     {
       "tag": "CreateArgument",
@@ -179,7 +179,7 @@
     {
       "tag": "CreateField",
       "model": "Park",
-      "field": "Ride",
+      "field": "rides",
       "type": "Ride",
       "arity": "List"
     },
@@ -434,7 +434,7 @@
     {
       "tag": "CreateField",
       "model": "Ride",
-      "field": "WaitTime",
+      "field": "waitTimes",
       "type": "WaitTime",
       "arity": "List"
     },
@@ -503,7 +503,7 @@
       "tag": "CreateField",
       "model": "WaitTime",
       "field": "active",
-      "type": "String",
+      "type": "Boolean",
       "arity": "Required"
     },
     {
@@ -568,7 +568,7 @@
       "model": "WaitTime",
       "field": "ride",
       "type": "Ride",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -614,12 +614,12 @@
       "model": "WaitTime",
       "field": "rideId",
       "type": "Int",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateField",
       "model": "WaitTime",
-      "field": "Job",
+      "field": "job",
       "type": "Job",
       "arity": "Required"
     },
@@ -629,7 +629,7 @@
         "path": {
           "tag": "Field",
           "model": "WaitTime",
-          "field": "Job"
+          "field": "job"
         },
         "directive": "relation"
       }
@@ -641,7 +641,7 @@
         "path": {
           "tag": "Field",
           "model": "WaitTime",
-          "field": "Job"
+          "field": "job"
         },
         "directive": "relation"
       },
@@ -655,7 +655,7 @@
         "path": {
           "tag": "Field",
           "model": "WaitTime",
-          "field": "Job"
+          "field": "job"
         },
         "directive": "relation"
       },
@@ -668,59 +668,6 @@
       "field": "jobId",
       "type": "Int",
       "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "WaitTime",
-      "field": "User",
-      "type": "User",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "WaitTime",
-          "field": "User"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "WaitTime",
-          "field": "User"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[userId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "WaitTime",
-          "field": "User"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "WaitTime",
-      "field": "userId",
-      "type": "Int",
-      "arity": "Optional"
     },
     {
       "tag": "CreateModel",
@@ -831,7 +778,7 @@
       "model": "User",
       "field": "updatedAt",
       "type": "DateTime",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",
@@ -847,15 +794,8 @@
     {
       "tag": "CreateField",
       "model": "User",
-      "field": "Job",
+      "field": "jobs",
       "type": "Job",
-      "arity": "List"
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "WaitTime",
-      "type": "WaitTime",
       "arity": "List"
     },
     {
@@ -917,7 +857,7 @@
       "model": "Job",
       "field": "endTime",
       "type": "DateTime",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateField",
@@ -925,6 +865,31 @@
       "field": "created",
       "type": "Int",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Job",
+          "field": "created"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Job",
+          "field": "created"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "0"
     },
     {
       "tag": "CreateField",
@@ -1032,7 +997,7 @@
     {
       "tag": "CreateField",
       "model": "Job",
-      "field": "WaitTime",
+      "field": "waitTimes",
       "type": "WaitTime",
       "arity": "List"
     }

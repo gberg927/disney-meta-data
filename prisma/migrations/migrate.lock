@@ -1,10 +1,3 @@
 # Prisma Migrate lockfile v1
 
-20200618164844-initial
-20200622105025-user-updatetime-null
-20200622105833-ride-longid-unique
-20200622110009-ride-longid-remove-unique
-20200622112239-job-endtime-null
-20200622113057-changed-relations-names
-20200622113320-waittime-active-bool
-20200622113838-waittime-ride-null
+20200624134320-init
