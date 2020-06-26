@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { jobs, parks, rides, scrape } from './api';
+import { jobs, resorts, scrape } from './api';
 
 const app = express();
 
@@ -14,8 +14,7 @@ app.get('/', async (req, res) => {
 });
 
 app.use('/api/jobs', jobs);
-app.use('/api/parks', parks);
-app.use('/api/rides', rides);
+app.use('/api/resorts', resorts);
 app.use('/api/scrape', scrape);
 
 const PORT = process.env.PORT || 5000;

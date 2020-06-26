@@ -1,6 +1,6 @@
 import express from 'express';
 import { authenticate } from '../auth';
-import processParks from '../scrape/themeparks';
+import processResorts from '../scrape/themeparks';
 
 const scrape = express.Router();
 
@@ -10,7 +10,7 @@ scrape.post('/', async (req, res) => {
     return res.status(400).json({ errors: 'Invalid Username or Password.' });
   }
 
-  const job = await processParks(user);
+  const job = await processResorts(user);
   res.status(200).json({ job });
 });
 

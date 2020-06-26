@@ -71,9 +71,10 @@ const processRide = async data => {
   return waitTime;
 };
 
-const getParkRideTimes = async park => {
+const getParkRideTimes = async (park, resortSlug) => {
   let rideTimes = [];
-  switch (park.slug) {
+  const slug = `${resortSlug}-${park.slug}`;
+  switch (slug) {
     case 'wdw-magic-kingdom':
       rideTimes = await GetWDWMagicKingdomWaitTimes();
       break;
@@ -86,28 +87,28 @@ const getParkRideTimes = async park => {
     case 'wdw-animal-kingdom':
       rideTimes = await GetWDWAnimalKingdomnWaitTimes();
       break;
-    case 'dr-magic-kingdom':
+    case 'dl-magic-kingdom':
       rideTimes = await GetDRMagicKingdomWaitTimes();
       break;
-    case 'dr-california-adventure':
+    case 'dl-california-adventure':
       rideTimes = await GetDRCaliforniaAdventureWaitTimes();
       break;
-    case 'dp-magic-kingdom':
+    case 'dlp-magic-kingdom':
       rideTimes = await GetDPMagicKingdomWaitTimes();
       break;
-    case 'dp-walt-disney-studios':
+    case 'dlp-walt-disney-studios':
       rideTimes = await GetDPWaltDisneyStudiosWaitTimes();
       break;
-    case 'hk-disneyland':
+    case 'hkd-disneyland':
       rideTimes = await GetHKDisneylandWaitTimes();
       break;
-    case 'sdr-magic-kingdom':
+    case 'shd-magic-kingdom':
       rideTimes = await GetSDRMagicKingdomWaitTimes();
       break;
-    case 'tdr-magic-kingdom':
+    case 'td-magic-kingdom':
       rideTimes = await GetTDRMagicKingdomWaitTimes();
       break;
-    case 'tdr-disney-sea':
+    case 'td-disney-sea':
       rideTimes = await GetTDRDisneySeaWaitTimes();
       break;
     default:
@@ -116,12 +117,12 @@ const getParkRideTimes = async park => {
   return rideTimes;
 };
 
-const processPark = async park => {
+const processPark = async (park, resortSlug) => {
   console.log(`Park: ${park.slug}`);
   const processedWaitTimes = [];
 
   try {
-    const rideTimes = await getParkRideTimes(park);
+    const rideTimes = await getParkRideTimes(park, resortSlug);
     for (const rideTime of rideTimes) {
       const processedWaitTime = await processRide(rideTime);
       processedWaitTimes.push(processedWaitTime);
@@ -165,15 +166,37 @@ const endJob = async () => {
   });
 };
 
-const processParks = async user => {
-  console.log(`Processing Parks: ${timestamp}`);
+const processResort = async resort => {
+  console.log(`Resort: ${resort.slug}`);
   const processedParks = [];
-  const parks = await prisma.park.findMany();
+
+  for (const park of resort.parks) {
+    const processedPark = await processPark(park, resort.slug);
+    processedParks.push(processedPark);
+  }
+
+  const processedResort = {
+    id: resort.id,
+    name: resort.name,
+    slug: resort.slug,
+    processedParks,
+  };
+  return processedResort;
+};
+
+const processResorts = async user => {
+  console.log(`Processing Resorts: ${timestamp}`);
+  const processedResorts = [];
+  const resorts = await prisma.resort.findMany({
+    include: {
+      parks: true,
+    },
+  });
 
   await startJob(user);
-  for (const park of parks) {
-    const processedPark = await processPark(park);
-    processedParks.push(processedPark);
+  for (const resort of resorts) {
+    const processedResort = await processResort(resort);
+    processedResorts.push(processedResort);
   }
   await endJob();
 
@@ -181,9 +204,9 @@ const processParks = async user => {
     status: job.status,
     startTime: job.timestamp,
     endTime: job.endTime,
-    processedParks,
+    processedResorts,
   };
   return processedJob;
 };
 
-export default processParks;
+export default processResorts;

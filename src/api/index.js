@@ -1,4 +1,3 @@
 export * from './jobs';
-export * from './parks';
-export * from './rides';
+export * from './resorts';
 export * from './scrape';

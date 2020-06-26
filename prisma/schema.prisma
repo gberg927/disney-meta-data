@@ -7,6 +7,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Resort {
+  id    Int    @id @default(autoincrement())
+  name  String
+  slug  String
+  parks Park[]
+}
+
 model Park {
   id        Int       @id @default(autoincrement())
   name      String
@@ -16,6 +23,8 @@ model Park {
   timezone  String
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  resort    Resort    @relation(fields: [resortId], references: [id])
+  resortId  Int
   rides     Ride[]
 }
 
