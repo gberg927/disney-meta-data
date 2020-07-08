@@ -117,9 +117,6 @@ resorts.get(
           gte: subDays(new Date(), 1),
         },
       },
-      orderBy: {
-        timestamp: 'desc',
-      },
     });
     res.status(200).json({ waitTimes: rtnWaitTimes });
   }
