@@ -1,4 +1,6 @@
 import express from 'express';
+import { subDays } from 'date-fns';
+
 import prisma from '../prisma';
 
 const resorts = express.Router();
@@ -110,6 +112,9 @@ resorts.get(
             slug: parkSlug,
             resort: { slug: resortSlug },
           },
+        },
+        timestamp: {
+          gte: subDays(new Date(), 1),
         },
       },
       orderBy: {
