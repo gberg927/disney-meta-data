@@ -276,6 +276,17 @@ export interface NexusGenInputs {
     none?: NexusGenInputs['WaitTimeWhereInput'] | null; // WaitTimeWhereInput
     some?: NexusGenInputs['WaitTimeWhereInput'] | null; // WaitTimeWhereInput
   }
+  WaitTimeOrderByInput: { // input type
+    active?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    amount?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    createdAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    id?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    jobId?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    rideId?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    status?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    timestamp?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    updatedAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+  }
   WaitTimeWhereInput: { // input type
     active?: NexusGenInputs['BooleanFilter'] | null; // BooleanFilter
     amount?: NexusGenInputs['IntFilter'] | null; // IntFilter
@@ -291,6 +302,9 @@ export interface NexusGenInputs {
     status?: NexusGenInputs['StringFilter'] | null; // StringFilter
     timestamp?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     updatedAt?: NexusGenInputs['NullableDateTimeFilter'] | null; // NullableDateTimeFilter
+  }
+  WaitTimeWhereUniqueInput: { // input type
+    id?: number | null; // Int
   }
 }
 
@@ -342,6 +356,13 @@ export interface NexusGenRootTypes {
     email: string; // String!
     id: number; // Int!
   }
+  WaitTime: { // root type
+    active: boolean; // Boolean!
+    amount: number; // Int!
+    id: number; // Int!
+    status: string; // String!
+    timestamp: any; // DateTime!
+  }
   String: string;
   Int: number;
   Float: number;
@@ -380,7 +401,9 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   WaitTimeFilter: NexusGenInputs['WaitTimeFilter'];
+  WaitTimeOrderByInput: NexusGenInputs['WaitTimeOrderByInput'];
   WaitTimeWhereInput: NexusGenInputs['WaitTimeWhereInput'];
+  WaitTimeWhereUniqueInput: NexusGenInputs['WaitTimeWhereUniqueInput'];
   OrderByArg: NexusGenEnums['OrderByArg'];
   RideCategory: NexusGenEnums['RideCategory'];
   RideType: NexusGenEnums['RideType'];
@@ -415,6 +438,8 @@ export interface NexusGenFieldTypes {
     rides: NexusGenRootTypes['Ride'][]; // [Ride!]!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
+    waitTime: NexusGenRootTypes['WaitTime'] | null; // WaitTime
+    waitTimes: NexusGenRootTypes['WaitTime'][]; // [WaitTime!]!
   }
   Resort: { // field return type
     id: number; // Int!
@@ -439,11 +464,22 @@ export interface NexusGenFieldTypes {
     singleRider: boolean | null; // Boolean
     slug: string; // String!
     type: NexusGenEnums['RideType'] | null; // RideType
+    waitTime: NexusGenRootTypes['WaitTime'][]; // [WaitTime!]!
+    waitTimes: NexusGenRootTypes['WaitTime'][]; // [WaitTime!]!
   }
   User: { // field return type
     email: string; // String!
     id: number; // Int!
     jobs: NexusGenRootTypes['Job'][]; // [Job!]!
+  }
+  WaitTime: { // field return type
+    active: boolean; // Boolean!
+    amount: number; // Int!
+    id: number; // Int!
+    job: NexusGenRootTypes['Job']; // Job!
+    ride: NexusGenRootTypes['Ride'] | null; // Ride
+    status: string; // String!
+    timestamp: any; // DateTime!
   }
 }
 
@@ -494,6 +530,14 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
+    waitTime: { // args
+      where: NexusGenInputs['WaitTimeWhereUniqueInput']; // WaitTimeWhereUniqueInput!
+    }
+    waitTimes: { // args
+      orderBy?: NexusGenInputs['WaitTimeOrderByInput'] | null; // WaitTimeOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['WaitTimeWhereInput'] | null; // WaitTimeWhereInput
+    }
   }
   Resort: {
     parks: { // args
@@ -512,9 +556,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Job" | "Park" | "Query" | "Resort" | "Ride" | "User";
+export type NexusGenObjectNames = "Job" | "Park" | "Query" | "Resort" | "Ride" | "User" | "WaitTime";
 
-export type NexusGenInputNames = "BooleanFilter" | "DateTimeFilter" | "FloatFilter" | "IntFilter" | "JobFilter" | "JobOrderByInput" | "JobWhereInput" | "JobWhereUniqueInput" | "NullableBooleanFilter" | "NullableDateTimeFilter" | "NullableFloatFilter" | "NullableIntFilter" | "NullableStringFilter" | "ParkFilter" | "ParkOrderByInput" | "ParkWhereInput" | "ParkWhereUniqueInput" | "ResortOrderByInput" | "ResortWhereInput" | "ResortWhereUniqueInput" | "RideFilter" | "RideOrderByInput" | "RideWhereInput" | "RideWhereUniqueInput" | "StringFilter" | "UserOrderByInput" | "UserWhereInput" | "UserWhereUniqueInput" | "WaitTimeFilter" | "WaitTimeWhereInput";
+export type NexusGenInputNames = "BooleanFilter" | "DateTimeFilter" | "FloatFilter" | "IntFilter" | "JobFilter" | "JobOrderByInput" | "JobWhereInput" | "JobWhereUniqueInput" | "NullableBooleanFilter" | "NullableDateTimeFilter" | "NullableFloatFilter" | "NullableIntFilter" | "NullableStringFilter" | "ParkFilter" | "ParkOrderByInput" | "ParkWhereInput" | "ParkWhereUniqueInput" | "ResortOrderByInput" | "ResortWhereInput" | "ResortWhereUniqueInput" | "RideFilter" | "RideOrderByInput" | "RideWhereInput" | "RideWhereUniqueInput" | "StringFilter" | "UserOrderByInput" | "UserWhereInput" | "UserWhereUniqueInput" | "WaitTimeFilter" | "WaitTimeOrderByInput" | "WaitTimeWhereInput" | "WaitTimeWhereUniqueInput";
 
 export type NexusGenEnumNames = "OrderByArg" | "RideCategory" | "RideType";
 

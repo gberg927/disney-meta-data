@@ -1,5 +1,41 @@
 import { nexusPrismaPlugin } from 'nexus-prisma';
 import { makeSchema, objectType } from '@nexus/schema';
+import { subMinutes } from 'date-fns';
+
+const User = objectType({
+  name: 'User',
+  definition(t) {
+    t.model.id();
+    t.model.email();
+    t.model.jobs({
+      pagination: true,
+    });
+  },
+});
+
+const Job = objectType({
+  name: 'Job',
+  definition(t) {
+    t.model.id();
+    t.model.startTime();
+    t.model.endTime();
+    t.model.created();
+    t.model.user();
+  },
+});
+
+const WaitTime = objectType({
+  name: 'WaitTime',
+  definition(t) {
+    t.model.id();
+    t.model.timestamp();
+    t.model.amount();
+    t.model.active();
+    t.model.status();
+    t.model.ride();
+    t.model.job();
+  },
+});
 
 const Ride = objectType({
   name: 'Ride',
@@ -20,6 +56,38 @@ const Ride = objectType({
     t.model.singleRider();
     t.model.riderSwap();
     t.model.park();
+    t.list.field('waitTime', {
+      type: WaitTime,
+      resolve: (root, args, ctx) =>
+        ctx.prisma.waitTime.findMany({
+          where: {
+            ride: {
+              id: root.id,
+            },
+          },
+          orderBy: {
+            timestamp: 'desc',
+          },
+          take: 1,
+        }),
+    });
+    t.list.field('waitTimes', {
+      type: WaitTime,
+      resolve: (root, args, ctx) =>
+        ctx.prisma.waitTime.findMany({
+          where: {
+            ride: {
+              id: root.id,
+            },
+            timestamp: {
+              gte: subMinutes(new Date(), 1454),
+            },
+          },
+          orderBy: {
+            timestamp: 'desc',
+          },
+        }),
+    });
   },
 });
 
@@ -47,31 +115,15 @@ const Resort = objectType({
   },
 });
 
-const User = objectType({
-  name: 'User',
-  definition(t) {
-    t.model.id();
-    t.model.email();
-    t.model.jobs({
-      pagination: true,
-    });
-  },
-});
-
-const Job = objectType({
-  name: 'Job',
-  definition(t) {
-    t.model.id();
-    t.model.startTime();
-    t.model.endTime();
-    t.model.created();
-    t.model.user();
-  },
-});
-
 const Query = objectType({
   name: 'Query',
   definition(t) {
+    t.crud.waitTime();
+    t.crud.waitTimes({
+      filtering: true,
+      ordering: true,
+      pagination: true,
+    });
     t.crud.resort();
     t.crud.resorts({
       filtering: true,
@@ -115,7 +167,7 @@ const Mutation = objectType({
 */
 
 const schema = makeSchema({
-  types: [Ride, Park, Resort, User, Job, Query],
+  types: [User, Job, WaitTime, Ride, Park, Resort, Query],
   plugins: [nexusPrismaPlugin()],
   outputs: {
     schema: `${__dirname}/schema.graphql`,

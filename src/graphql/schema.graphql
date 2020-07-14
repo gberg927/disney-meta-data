@@ -203,6 +203,8 @@ type Query {
   rides(orderBy: RideOrderByInput, skip: Int, where: RideWhereInput): [Ride!]!
   user(where: UserWhereUniqueInput!): User
   users(orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
+  waitTime(where: WaitTimeWhereUniqueInput!): WaitTime
+  waitTimes(orderBy: WaitTimeOrderByInput, skip: Int, where: WaitTimeWhereInput): [WaitTime!]!
 }
 
 type Resort {
@@ -249,6 +251,8 @@ type Ride {
   singleRider: Boolean
   slug: String!
   type: RideType
+  waitTime: [WaitTime!]!
+  waitTimes: [WaitTime!]!
 }
 
 enum RideCategory {
@@ -368,10 +372,32 @@ input UserWhereUniqueInput {
   id: Int
 }
 
+type WaitTime {
+  active: Boolean!
+  amount: Int!
+  id: Int!
+  job: Job!
+  ride: Ride
+  status: String!
+  timestamp: DateTime!
+}
+
 input WaitTimeFilter {
   every: WaitTimeWhereInput
   none: WaitTimeWhereInput
   some: WaitTimeWhereInput
+}
+
+input WaitTimeOrderByInput {
+  active: OrderByArg
+  amount: OrderByArg
+  createdAt: OrderByArg
+  id: OrderByArg
+  jobId: OrderByArg
+  rideId: OrderByArg
+  status: OrderByArg
+  timestamp: OrderByArg
+  updatedAt: OrderByArg
 }
 
 input WaitTimeWhereInput {
@@ -389,4 +415,8 @@ input WaitTimeWhereInput {
   status: StringFilter
   timestamp: DateTimeFilter
   updatedAt: NullableDateTimeFilter
+}
+
+input WaitTimeWhereUniqueInput {
+  id: Int
 }

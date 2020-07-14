@@ -1,5 +1,5 @@
 import express from 'express';
-import { subDays } from 'date-fns';
+import { subMinutes } from 'date-fns';
 
 import prisma from '../../prisma';
 
@@ -114,7 +114,7 @@ resorts.get(
           },
         },
         timestamp: {
-          gte: subDays(new Date(), 1),
+          gte: subMinutes(new Date(), 1454),
         },
       },
       orderBy: {
