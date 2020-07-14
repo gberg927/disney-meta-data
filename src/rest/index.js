@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { resorts } from './api/resorts';
+import { resorts, scrape } from './api';
 
 const app = express();
 
@@ -14,5 +14,6 @@ app.get('/', async (req, res) => {
 });
 
 app.use('/api/resorts', resorts);
+app.use('/api/scrape', scrape);
 
 export default app;
