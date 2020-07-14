@@ -1,7 +1,7 @@
 import express from 'express';
 import { subDays } from 'date-fns';
 
-import prisma from '../prisma';
+import prisma from '../../prisma';
 
 const resorts = express.Router();
 
@@ -116,6 +116,9 @@ resorts.get(
         timestamp: {
           gte: subDays(new Date(), 1),
         },
+      },
+      orderBy: {
+        timestamp: 'desc',
       },
     });
     res.status(200).json({ waitTimes: rtnWaitTimes });

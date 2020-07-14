@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "prisma generate",
     "dev": "nodemon ./src/index.js --exec babel-node ./src/index.js",
-    "start": "babel-node ./src/index.js"
+    "start": "babel-node ./src/index.js",
+    "test": ""
   },
   "author": "Dennis Glasberg <dennis.glasberg@gmail.com>",
   "license": "ISC",
@@ -54,8 +54,9 @@
     "cors": "^2.8.5",
     "date-fns": "^2.14.0",
     "express": "^4.17.1",
+    "graphql": "^15.3.0",
+    "nexus": "^0.24.2",
     "nexus-prisma": "^0.14.0",
-    "slugify": "^1.4.4",
     "themeparks": "^5.1.39"
   }
 }

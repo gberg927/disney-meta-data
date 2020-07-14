@@ -1,24 +1,10 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import { jobs, resorts, scrape } from './api';
+import rest from './rest';
+import graphql from './graphql';
 
-const app = express();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
-
-app.get('/', async (req, res) => {
-  res.send('Welcome!');
+rest.listen({ port: 5000 }, () => {
+  console.log(`REST API: Listening: http://localhost:5000`);
 });
 
-app.use('/api/jobs', jobs);
-app.use('/api/resorts', resorts);
-app.use('/api/scrape', scrape);
-
-const PORT = process.env.PORT || 5000;
-
-app.listen({ port: PORT }, () => {
-  console.log(`REST API: Listening: http://localhost:${PORT}`);
+graphql.listen({ port: 4000 }, () => {
+  console.log(`GRAPHQL API: Listening: http://localhost:4000`);
 });
