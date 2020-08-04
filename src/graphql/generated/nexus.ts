@@ -428,6 +428,9 @@ export interface NexusGenFieldTypes {
     timezone: string; // String!
   }
   Query: { // field return type
+    getPark: NexusGenRootTypes['Park']; // Park!
+    getResort: NexusGenRootTypes['Resort']; // Resort!
+    getRide: NexusGenRootTypes['Ride']; // Ride!
     job: NexusGenRootTypes['Job'] | null; // Job
     jobs: NexusGenRootTypes['Job'][]; // [Job!]!
     park: NexusGenRootTypes['Park'] | null; // Park
@@ -464,7 +467,7 @@ export interface NexusGenFieldTypes {
     singleRider: boolean | null; // Boolean
     slug: string; // String!
     type: NexusGenEnums['RideType'] | null; // RideType
-    waitTime: NexusGenRootTypes['WaitTime'][]; // [WaitTime!]!
+    waitTime: NexusGenRootTypes['WaitTime'] | null; // WaitTime
     waitTimes: NexusGenRootTypes['WaitTime'][]; // [WaitTime!]!
   }
   User: { // field return type
@@ -490,6 +493,18 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    getPark: { // args
+      parkSlug?: string | null; // String
+      resortSlug?: string | null; // String
+    }
+    getResort: { // args
+      resortSlug?: string | null; // String
+    }
+    getRide: { // args
+      parkSlug?: string | null; // String
+      resortSlug?: string | null; // String
+      rideSlug?: string | null; // String
+    }
     job: { // args
       where: NexusGenInputs['JobWhereUniqueInput']; // JobWhereUniqueInput!
     }

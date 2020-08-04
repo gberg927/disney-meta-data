@@ -193,6 +193,9 @@ input ParkWhereUniqueInput {
 }
 
 type Query {
+  getPark(parkSlug: String, resortSlug: String): Park!
+  getResort(resortSlug: String): Resort!
+  getRide(parkSlug: String, resortSlug: String, rideSlug: String): Ride!
   job(where: JobWhereUniqueInput!): Job
   jobs(orderBy: JobOrderByInput, skip: Int, where: JobWhereInput): [Job!]!
   park(where: ParkWhereUniqueInput!): Park
@@ -251,7 +254,7 @@ type Ride {
   singleRider: Boolean
   slug: String!
   type: RideType
-  waitTime: [WaitTime!]!
+  waitTime: WaitTime
   waitTimes: [WaitTime!]!
 }
 

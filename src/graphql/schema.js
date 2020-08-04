@@ -1,5 +1,5 @@
 import { nexusPrismaPlugin } from 'nexus-prisma';
-import { makeSchema, objectType } from '@nexus/schema';
+import { makeSchema, objectType, stringArg } from '@nexus/schema';
 import { subMinutes } from 'date-fns';
 
 const User = objectType({
@@ -56,20 +56,23 @@ const Ride = objectType({
     t.model.singleRider();
     t.model.riderSwap();
     t.model.park();
-    t.list.field('waitTime', {
+    t.field('waitTime', {
       type: WaitTime,
+      nullable: true,
       resolve: (root, args, ctx) =>
-        ctx.prisma.waitTime.findMany({
-          where: {
-            ride: {
-              id: root.id,
+        ctx.prisma.waitTime
+          .findMany({
+            where: {
+              ride: {
+                id: root.id,
+              },
             },
-          },
-          orderBy: {
-            timestamp: 'desc',
-          },
-          take: 1,
-        }),
+            orderBy: {
+              timestamp: 'desc',
+            },
+            take: 1,
+          })
+          .then(_ => _[0]),
     });
     t.list.field('waitTimes', {
       type: WaitTime,
@@ -151,17 +154,63 @@ const Query = objectType({
       ordering: true,
       pagination: true,
     });
+    t.field('getResort', {
+      type: 'Resort',
+      args: { resortSlug: stringArg('resort slug') },
+      resolve: (root, args, ctx) =>
+        ctx.prisma.resort
+          .findMany({
+            where: {
+              slug: args.resortSlug,
+            },
+            take: 1,
+          })
+          .then(_ => _[0]),
+    });
+    t.field('getPark', {
+      type: 'Park',
+      args: {
+        resortSlug: stringArg('resort slug'),
+        parkSlug: stringArg('park slug'),
+      },
+      resolve: (root, args, ctx) =>
+        ctx.prisma.park
+          .findMany({
+            where: {
+              slug: args.parkSlug,
+              resort: {
+                slug: args.resortSlug,
+              },
+            },
+            take: 1,
+          })
+          .then(_ => _[0]),
+    });
+    t.field('getRide', {
+      type: 'Ride',
+      args: {
+        resortSlug: stringArg('resort slug'),
+        parkSlug: stringArg('park slug'),
+        rideSlug: stringArg('park slug'),
+      },
+      resolve: (root, args, ctx) =>
+        ctx.prisma.ride
+          .findMany({
+            where: {
+              slug: args.rideSlug,
+              park: {
+                slug: args.parkSlug,
+                resort: {
+                  slug: args.resortSlug,
+                },
+              },
+            },
+            take: 1,
+          })
+          .then(_ => _[0]),
+    });
   },
 });
-
-/*
-const Mutation = objectType({
-  name: 'Mutation',
-  definition(t) {
-    t.crud.createOneUser();
-  },
-});
-*/
 
 const schema = makeSchema({
   types: [User, Job, WaitTime, Ride, Park, Resort, Query],
