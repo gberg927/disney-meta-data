@@ -19,9 +19,13 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  BooleanFilter: { // input type
+  BoolFilter: { // input type
     equals?: boolean | null; // Boolean
-    not?: boolean | null; // Boolean
+    not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
+  }
+  BoolNullableFilter: { // input type
+    equals?: boolean | null; // Boolean
+    not?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
   }
   DateTimeFilter: { // input type
     equals?: any | null; // DateTime
@@ -30,7 +34,17 @@ export interface NexusGenInputs {
     in?: any[] | null; // [DateTime!]
     lt?: any | null; // DateTime
     lte?: any | null; // DateTime
-    not?: any | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: any[] | null; // [DateTime!]
+  }
+  DateTimeNullableFilter: { // input type
+    equals?: any | null; // DateTime
+    gt?: any | null; // DateTime
+    gte?: any | null; // DateTime
+    in?: any[] | null; // [DateTime!]
+    lt?: any | null; // DateTime
+    lte?: any | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeNullableFilter'] | null; // NestedDateTimeNullableFilter
     notIn?: any[] | null; // [DateTime!]
   }
   FloatFilter: { // input type
@@ -40,7 +54,17 @@ export interface NexusGenInputs {
     in?: number[] | null; // [Float!]
     lt?: number | null; // Float
     lte?: number | null; // Float
-    not?: number | null; // Float
+    not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
+    notIn?: number[] | null; // [Float!]
+  }
+  FloatNullableFilter: { // input type
+    equals?: number | null; // Float
+    gt?: number | null; // Float
+    gte?: number | null; // Float
+    in?: number[] | null; // [Float!]
+    lt?: number | null; // Float
+    lte?: number | null; // Float
+    not?: NexusGenInputs['NestedFloatNullableFilter'] | null; // NestedFloatNullableFilter
     notIn?: number[] | null; // [Float!]
   }
   IntFilter: { // input type
@@ -50,75 +74,119 @@ export interface NexusGenInputs {
     in?: number[] | null; // [Int!]
     lt?: number | null; // Int
     lte?: number | null; // Int
-    not?: number | null; // Int
+    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
     notIn?: number[] | null; // [Int!]
   }
-  JobFilter: { // input type
-    every?: NexusGenInputs['JobWhereInput'] | null; // JobWhereInput
-    none?: NexusGenInputs['JobWhereInput'] | null; // JobWhereInput
-    some?: NexusGenInputs['JobWhereInput'] | null; // JobWhereInput
-  }
-  JobOrderByInput: { // input type
-    created?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    createdAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    endTime?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    id?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    startTime?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    updatedAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    userId?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-  }
-  JobWhereInput: { // input type
-    AND?: NexusGenInputs['JobWhereInput'][] | null; // [JobWhereInput!]
-    created?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    endTime?: NexusGenInputs['NullableDateTimeFilter'] | null; // NullableDateTimeFilter
-    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    NOT?: NexusGenInputs['JobWhereInput'][] | null; // [JobWhereInput!]
-    OR?: NexusGenInputs['JobWhereInput'][] | null; // [JobWhereInput!]
-    startTime?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    updatedAt?: NexusGenInputs['NullableDateTimeFilter'] | null; // NullableDateTimeFilter
-    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    userId?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    waitTimes?: NexusGenInputs['WaitTimeFilter'] | null; // WaitTimeFilter
-  }
-  JobWhereUniqueInput: { // input type
-    id?: number | null; // Int
-  }
-  NullableBooleanFilter: { // input type
-    equals?: boolean | null; // Boolean
-    not?: boolean | null; // Boolean
-  }
-  NullableDateTimeFilter: { // input type
-    equals?: any | null; // DateTime
-    gt?: any | null; // DateTime
-    gte?: any | null; // DateTime
-    in?: any[] | null; // [DateTime!]
-    lt?: any | null; // DateTime
-    lte?: any | null; // DateTime
-    not?: any | null; // DateTime
-    notIn?: any[] | null; // [DateTime!]
-  }
-  NullableFloatFilter: { // input type
-    equals?: number | null; // Float
-    gt?: number | null; // Float
-    gte?: number | null; // Float
-    in?: number[] | null; // [Float!]
-    lt?: number | null; // Float
-    lte?: number | null; // Float
-    not?: number | null; // Float
-    notIn?: number[] | null; // [Float!]
-  }
-  NullableIntFilter: { // input type
+  IntNullableFilter: { // input type
     equals?: number | null; // Int
     gt?: number | null; // Int
     gte?: number | null; // Int
     in?: number[] | null; // [Int!]
     lt?: number | null; // Int
     lte?: number | null; // Int
-    not?: number | null; // Int
+    not?: NexusGenInputs['NestedIntNullableFilter'] | null; // NestedIntNullableFilter
     notIn?: number[] | null; // [Int!]
   }
-  NullableStringFilter: { // input type
+  JobListRelationFilter: { // input type
+    every?: NexusGenInputs['JobWhereInput'] | null; // JobWhereInput
+    none?: NexusGenInputs['JobWhereInput'] | null; // JobWhereInput
+    some?: NexusGenInputs['JobWhereInput'] | null; // JobWhereInput
+  }
+  JobOrderByInput: { // input type
+    created?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    endTime?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    startTime?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    userId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  JobWhereInput: { // input type
+    AND?: NexusGenInputs['JobWhereInput'][] | null; // [JobWhereInput!]
+    created?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    endTime?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['JobWhereInput'][] | null; // [JobWhereInput!]
+    OR?: NexusGenInputs['JobWhereInput'][] | null; // [JobWhereInput!]
+    startTime?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    userId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    waitTimes?: NexusGenInputs['WaitTimeListRelationFilter'] | null; // WaitTimeListRelationFilter
+  }
+  JobWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
+  NestedBoolFilter: { // input type
+    equals?: boolean | null; // Boolean
+    not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
+  }
+  NestedBoolNullableFilter: { // input type
+    equals?: boolean | null; // Boolean
+    not?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
+  }
+  NestedDateTimeFilter: { // input type
+    equals?: any | null; // DateTime
+    gt?: any | null; // DateTime
+    gte?: any | null; // DateTime
+    in?: any[] | null; // [DateTime!]
+    lt?: any | null; // DateTime
+    lte?: any | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: any[] | null; // [DateTime!]
+  }
+  NestedDateTimeNullableFilter: { // input type
+    equals?: any | null; // DateTime
+    gt?: any | null; // DateTime
+    gte?: any | null; // DateTime
+    in?: any[] | null; // [DateTime!]
+    lt?: any | null; // DateTime
+    lte?: any | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeNullableFilter'] | null; // NestedDateTimeNullableFilter
+    notIn?: any[] | null; // [DateTime!]
+  }
+  NestedFloatFilter: { // input type
+    equals?: number | null; // Float
+    gt?: number | null; // Float
+    gte?: number | null; // Float
+    in?: number[] | null; // [Float!]
+    lt?: number | null; // Float
+    lte?: number | null; // Float
+    not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
+    notIn?: number[] | null; // [Float!]
+  }
+  NestedFloatNullableFilter: { // input type
+    equals?: number | null; // Float
+    gt?: number | null; // Float
+    gte?: number | null; // Float
+    in?: number[] | null; // [Float!]
+    lt?: number | null; // Float
+    lte?: number | null; // Float
+    not?: NexusGenInputs['NestedFloatNullableFilter'] | null; // NestedFloatNullableFilter
+    notIn?: number[] | null; // [Float!]
+  }
+  NestedIntFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    notIn?: number[] | null; // [Int!]
+  }
+  NestedIntNullableFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: NexusGenInputs['NestedIntNullableFilter'] | null; // NestedIntNullableFilter
+    notIn?: number[] | null; // [Int!]
+  }
+  NestedStringFilter: { // input type
     contains?: string | null; // String
     endsWith?: string | null; // String
     equals?: string | null; // String
@@ -127,25 +195,38 @@ export interface NexusGenInputs {
     in?: string[] | null; // [String!]
     lt?: string | null; // String
     lte?: string | null; // String
-    not?: string | null; // String
+    not?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
-  ParkFilter: { // input type
+  NestedStringNullableFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: NexusGenInputs['NestedStringNullableFilter'] | null; // NestedStringNullableFilter
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
+  ParkListRelationFilter: { // input type
     every?: NexusGenInputs['ParkWhereInput'] | null; // ParkWhereInput
     none?: NexusGenInputs['ParkWhereInput'] | null; // ParkWhereInput
     some?: NexusGenInputs['ParkWhereInput'] | null; // ParkWhereInput
   }
   ParkOrderByInput: { // input type
-    createdAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    id?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    latitude?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    longitude?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    name?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    resortId?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    slug?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    timezone?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    updatedAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    latitude?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    longitude?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    name?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    resortId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    slug?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    timezone?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   ParkWhereInput: { // input type
     AND?: NexusGenInputs['ParkWhereInput'][] | null; // [ParkWhereInput!]
@@ -158,18 +239,18 @@ export interface NexusGenInputs {
     OR?: NexusGenInputs['ParkWhereInput'][] | null; // [ParkWhereInput!]
     resort?: NexusGenInputs['ResortWhereInput'] | null; // ResortWhereInput
     resortId?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    rides?: NexusGenInputs['RideFilter'] | null; // RideFilter
+    rides?: NexusGenInputs['RideListRelationFilter'] | null; // RideListRelationFilter
     slug?: NexusGenInputs['StringFilter'] | null; // StringFilter
     timezone?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    updatedAt?: NexusGenInputs['NullableDateTimeFilter'] | null; // NullableDateTimeFilter
+    updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
   }
   ParkWhereUniqueInput: { // input type
     id?: number | null; // Int
   }
   ResortOrderByInput: { // input type
-    id?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    name?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    slug?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    name?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    slug?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   ResortWhereInput: { // input type
     AND?: NexusGenInputs['ResortWhereInput'][] | null; // [ResortWhereInput!]
@@ -177,61 +258,61 @@ export interface NexusGenInputs {
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['ResortWhereInput'][] | null; // [ResortWhereInput!]
     OR?: NexusGenInputs['ResortWhereInput'][] | null; // [ResortWhereInput!]
-    parks?: NexusGenInputs['ParkFilter'] | null; // ParkFilter
+    parks?: NexusGenInputs['ParkListRelationFilter'] | null; // ParkListRelationFilter
     slug?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
   ResortWhereUniqueInput: { // input type
     id?: number | null; // Int
   }
-  RideFilter: { // input type
+  RideListRelationFilter: { // input type
     every?: NexusGenInputs['RideWhereInput'] | null; // RideWhereInput
     none?: NexusGenInputs['RideWhereInput'] | null; // RideWhereInput
     some?: NexusGenInputs['RideWhereInput'] | null; // RideWhereInput
   }
   RideOrderByInput: { // input type
-    area?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    category?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    createdAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    duration?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    fastPass?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    heightRestriction?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    id?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    latitude?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    longId?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    longitude?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    name?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    openedOn?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    parkId?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    riderSwap?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    singleRider?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    slug?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    type?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    updatedAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    area?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    category?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    duration?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    fastPass?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    heightRestriction?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    latitude?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    longId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    longitude?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    name?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    openedOn?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    parkId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    riderSwap?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    singleRider?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    slug?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    type?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   RideWhereInput: { // input type
     AND?: NexusGenInputs['RideWhereInput'][] | null; // [RideWhereInput!]
-    area?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    area?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     category?: NexusGenEnums['RideCategory'] | null; // RideCategory
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    duration?: NexusGenInputs['NullableFloatFilter'] | null; // NullableFloatFilter
-    fastPass?: NexusGenInputs['NullableBooleanFilter'] | null; // NullableBooleanFilter
-    heightRestriction?: NexusGenInputs['NullableIntFilter'] | null; // NullableIntFilter
+    duration?: NexusGenInputs['FloatNullableFilter'] | null; // FloatNullableFilter
+    fastPass?: NexusGenInputs['BoolNullableFilter'] | null; // BoolNullableFilter
+    heightRestriction?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    latitude?: NexusGenInputs['NullableFloatFilter'] | null; // NullableFloatFilter
-    longId?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
-    longitude?: NexusGenInputs['NullableFloatFilter'] | null; // NullableFloatFilter
+    latitude?: NexusGenInputs['FloatNullableFilter'] | null; // FloatNullableFilter
+    longId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    longitude?: NexusGenInputs['FloatNullableFilter'] | null; // FloatNullableFilter
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['RideWhereInput'][] | null; // [RideWhereInput!]
-    openedOn?: NexusGenInputs['NullableDateTimeFilter'] | null; // NullableDateTimeFilter
+    openedOn?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
     OR?: NexusGenInputs['RideWhereInput'][] | null; // [RideWhereInput!]
     park?: NexusGenInputs['ParkWhereInput'] | null; // ParkWhereInput
     parkId?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    riderSwap?: NexusGenInputs['NullableBooleanFilter'] | null; // NullableBooleanFilter
-    singleRider?: NexusGenInputs['NullableBooleanFilter'] | null; // NullableBooleanFilter
+    riderSwap?: NexusGenInputs['BoolNullableFilter'] | null; // BoolNullableFilter
+    singleRider?: NexusGenInputs['BoolNullableFilter'] | null; // BoolNullableFilter
     slug?: NexusGenInputs['StringFilter'] | null; // StringFilter
     type?: NexusGenEnums['RideType'] | null; // RideType
-    updatedAt?: NexusGenInputs['NullableDateTimeFilter'] | null; // NullableDateTimeFilter
-    waitTimes?: NexusGenInputs['WaitTimeFilter'] | null; // WaitTimeFilter
+    updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+    waitTimes?: NexusGenInputs['WaitTimeListRelationFilter'] | null; // WaitTimeListRelationFilter
   }
   RideWhereUniqueInput: { // input type
     id?: number | null; // Int
@@ -245,50 +326,63 @@ export interface NexusGenInputs {
     in?: string[] | null; // [String!]
     lt?: string | null; // String
     lte?: string | null; // String
-    not?: string | null; // String
+    not?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
+  StringNullableFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: NexusGenInputs['NestedStringNullableFilter'] | null; // NestedStringNullableFilter
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
   UserOrderByInput: { // input type
-    createdAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    email?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    id?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    password?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    updatedAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    email?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    password?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   UserWhereInput: { // input type
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    jobs?: NexusGenInputs['JobFilter'] | null; // JobFilter
+    jobs?: NexusGenInputs['JobListRelationFilter'] | null; // JobListRelationFilter
     NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     password?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    updatedAt?: NexusGenInputs['NullableDateTimeFilter'] | null; // NullableDateTimeFilter
+    updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
     id?: number | null; // Int
   }
-  WaitTimeFilter: { // input type
+  WaitTimeListRelationFilter: { // input type
     every?: NexusGenInputs['WaitTimeWhereInput'] | null; // WaitTimeWhereInput
     none?: NexusGenInputs['WaitTimeWhereInput'] | null; // WaitTimeWhereInput
     some?: NexusGenInputs['WaitTimeWhereInput'] | null; // WaitTimeWhereInput
   }
   WaitTimeOrderByInput: { // input type
-    active?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    amount?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    createdAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    id?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    jobId?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    rideId?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    status?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    timestamp?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-    updatedAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    active?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    amount?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    jobId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    rideId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    status?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    timestamp?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   WaitTimeWhereInput: { // input type
-    active?: NexusGenInputs['BooleanFilter'] | null; // BooleanFilter
+    active?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
     amount?: NexusGenInputs['IntFilter'] | null; // IntFilter
     AND?: NexusGenInputs['WaitTimeWhereInput'][] | null; // [WaitTimeWhereInput!]
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
@@ -298,10 +392,10 @@ export interface NexusGenInputs {
     NOT?: NexusGenInputs['WaitTimeWhereInput'][] | null; // [WaitTimeWhereInput!]
     OR?: NexusGenInputs['WaitTimeWhereInput'][] | null; // [WaitTimeWhereInput!]
     ride?: NexusGenInputs['RideWhereInput'] | null; // RideWhereInput
-    rideId?: NexusGenInputs['NullableIntFilter'] | null; // NullableIntFilter
+    rideId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
     status?: NexusGenInputs['StringFilter'] | null; // StringFilter
     timestamp?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    updatedAt?: NexusGenInputs['NullableDateTimeFilter'] | null; // NullableDateTimeFilter
+    updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
   }
   WaitTimeWhereUniqueInput: { // input type
     id?: number | null; // Int
@@ -309,9 +403,9 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  OrderByArg: "asc" | "desc"
   RideCategory: "ARCADE" | "CHARACTER_MEET" | "PLAY_AREA" | "RIDE" | "SHOW_CONTINUOUS" | "SHOW_SCHEDULED" | "WALKTHROUGH"
   RideType: "ATTRACTION" | "ENTERTAINMENT"
+  SortOrder: "asc" | "desc"
 }
 
 export interface NexusGenRootTypes {
@@ -372,41 +466,51 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
-  BooleanFilter: NexusGenInputs['BooleanFilter'];
+  BoolFilter: NexusGenInputs['BoolFilter'];
+  BoolNullableFilter: NexusGenInputs['BoolNullableFilter'];
   DateTimeFilter: NexusGenInputs['DateTimeFilter'];
+  DateTimeNullableFilter: NexusGenInputs['DateTimeNullableFilter'];
   FloatFilter: NexusGenInputs['FloatFilter'];
+  FloatNullableFilter: NexusGenInputs['FloatNullableFilter'];
   IntFilter: NexusGenInputs['IntFilter'];
-  JobFilter: NexusGenInputs['JobFilter'];
+  IntNullableFilter: NexusGenInputs['IntNullableFilter'];
+  JobListRelationFilter: NexusGenInputs['JobListRelationFilter'];
   JobOrderByInput: NexusGenInputs['JobOrderByInput'];
   JobWhereInput: NexusGenInputs['JobWhereInput'];
   JobWhereUniqueInput: NexusGenInputs['JobWhereUniqueInput'];
-  NullableBooleanFilter: NexusGenInputs['NullableBooleanFilter'];
-  NullableDateTimeFilter: NexusGenInputs['NullableDateTimeFilter'];
-  NullableFloatFilter: NexusGenInputs['NullableFloatFilter'];
-  NullableIntFilter: NexusGenInputs['NullableIntFilter'];
-  NullableStringFilter: NexusGenInputs['NullableStringFilter'];
-  ParkFilter: NexusGenInputs['ParkFilter'];
+  NestedBoolFilter: NexusGenInputs['NestedBoolFilter'];
+  NestedBoolNullableFilter: NexusGenInputs['NestedBoolNullableFilter'];
+  NestedDateTimeFilter: NexusGenInputs['NestedDateTimeFilter'];
+  NestedDateTimeNullableFilter: NexusGenInputs['NestedDateTimeNullableFilter'];
+  NestedFloatFilter: NexusGenInputs['NestedFloatFilter'];
+  NestedFloatNullableFilter: NexusGenInputs['NestedFloatNullableFilter'];
+  NestedIntFilter: NexusGenInputs['NestedIntFilter'];
+  NestedIntNullableFilter: NexusGenInputs['NestedIntNullableFilter'];
+  NestedStringFilter: NexusGenInputs['NestedStringFilter'];
+  NestedStringNullableFilter: NexusGenInputs['NestedStringNullableFilter'];
+  ParkListRelationFilter: NexusGenInputs['ParkListRelationFilter'];
   ParkOrderByInput: NexusGenInputs['ParkOrderByInput'];
   ParkWhereInput: NexusGenInputs['ParkWhereInput'];
   ParkWhereUniqueInput: NexusGenInputs['ParkWhereUniqueInput'];
   ResortOrderByInput: NexusGenInputs['ResortOrderByInput'];
   ResortWhereInput: NexusGenInputs['ResortWhereInput'];
   ResortWhereUniqueInput: NexusGenInputs['ResortWhereUniqueInput'];
-  RideFilter: NexusGenInputs['RideFilter'];
+  RideListRelationFilter: NexusGenInputs['RideListRelationFilter'];
   RideOrderByInput: NexusGenInputs['RideOrderByInput'];
   RideWhereInput: NexusGenInputs['RideWhereInput'];
   RideWhereUniqueInput: NexusGenInputs['RideWhereUniqueInput'];
   StringFilter: NexusGenInputs['StringFilter'];
+  StringNullableFilter: NexusGenInputs['StringNullableFilter'];
   UserOrderByInput: NexusGenInputs['UserOrderByInput'];
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
-  WaitTimeFilter: NexusGenInputs['WaitTimeFilter'];
+  WaitTimeListRelationFilter: NexusGenInputs['WaitTimeListRelationFilter'];
   WaitTimeOrderByInput: NexusGenInputs['WaitTimeOrderByInput'];
   WaitTimeWhereInput: NexusGenInputs['WaitTimeWhereInput'];
   WaitTimeWhereUniqueInput: NexusGenInputs['WaitTimeWhereUniqueInput'];
-  OrderByArg: NexusGenEnums['OrderByArg'];
   RideCategory: NexusGenEnums['RideCategory'];
   RideType: NexusGenEnums['RideType'];
+  SortOrder: NexusGenEnums['SortOrder'];
 }
 
 export interface NexusGenFieldTypes {
@@ -509,7 +613,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['JobWhereUniqueInput']; // JobWhereUniqueInput!
     }
     jobs: { // args
-      orderBy?: NexusGenInputs['JobOrderByInput'] | null; // JobOrderByInput
+      orderBy?: NexusGenInputs['JobOrderByInput'][] | null; // [JobOrderByInput!]
       skip?: number | null; // Int
       where?: NexusGenInputs['JobWhereInput'] | null; // JobWhereInput
     }
@@ -517,7 +621,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['ParkWhereUniqueInput']; // ParkWhereUniqueInput!
     }
     parks: { // args
-      orderBy?: NexusGenInputs['ParkOrderByInput'] | null; // ParkOrderByInput
+      orderBy?: NexusGenInputs['ParkOrderByInput'][] | null; // [ParkOrderByInput!]
       skip?: number | null; // Int
       where?: NexusGenInputs['ParkWhereInput'] | null; // ParkWhereInput
     }
@@ -525,7 +629,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['ResortWhereUniqueInput']; // ResortWhereUniqueInput!
     }
     resorts: { // args
-      orderBy?: NexusGenInputs['ResortOrderByInput'] | null; // ResortOrderByInput
+      orderBy?: NexusGenInputs['ResortOrderByInput'][] | null; // [ResortOrderByInput!]
       skip?: number | null; // Int
       where?: NexusGenInputs['ResortWhereInput'] | null; // ResortWhereInput
     }
@@ -533,7 +637,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['RideWhereUniqueInput']; // RideWhereUniqueInput!
     }
     rides: { // args
-      orderBy?: NexusGenInputs['RideOrderByInput'] | null; // RideOrderByInput
+      orderBy?: NexusGenInputs['RideOrderByInput'][] | null; // [RideOrderByInput!]
       skip?: number | null; // Int
       where?: NexusGenInputs['RideWhereInput'] | null; // RideWhereInput
     }
@@ -541,7 +645,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
     users: { // args
-      orderBy?: NexusGenInputs['UserOrderByInput'] | null; // UserOrderByInput
+      orderBy?: NexusGenInputs['UserOrderByInput'][] | null; // [UserOrderByInput!]
       skip?: number | null; // Int
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
@@ -549,7 +653,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['WaitTimeWhereUniqueInput']; // WaitTimeWhereUniqueInput!
     }
     waitTimes: { // args
-      orderBy?: NexusGenInputs['WaitTimeOrderByInput'] | null; // WaitTimeOrderByInput
+      orderBy?: NexusGenInputs['WaitTimeOrderByInput'][] | null; // [WaitTimeOrderByInput!]
       skip?: number | null; // Int
       where?: NexusGenInputs['WaitTimeWhereInput'] | null; // WaitTimeWhereInput
     }
@@ -573,9 +677,9 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Job" | "Park" | "Query" | "Resort" | "Ride" | "User" | "WaitTime";
 
-export type NexusGenInputNames = "BooleanFilter" | "DateTimeFilter" | "FloatFilter" | "IntFilter" | "JobFilter" | "JobOrderByInput" | "JobWhereInput" | "JobWhereUniqueInput" | "NullableBooleanFilter" | "NullableDateTimeFilter" | "NullableFloatFilter" | "NullableIntFilter" | "NullableStringFilter" | "ParkFilter" | "ParkOrderByInput" | "ParkWhereInput" | "ParkWhereUniqueInput" | "ResortOrderByInput" | "ResortWhereInput" | "ResortWhereUniqueInput" | "RideFilter" | "RideOrderByInput" | "RideWhereInput" | "RideWhereUniqueInput" | "StringFilter" | "UserOrderByInput" | "UserWhereInput" | "UserWhereUniqueInput" | "WaitTimeFilter" | "WaitTimeOrderByInput" | "WaitTimeWhereInput" | "WaitTimeWhereUniqueInput";
+export type NexusGenInputNames = "BoolFilter" | "BoolNullableFilter" | "DateTimeFilter" | "DateTimeNullableFilter" | "FloatFilter" | "FloatNullableFilter" | "IntFilter" | "IntNullableFilter" | "JobListRelationFilter" | "JobOrderByInput" | "JobWhereInput" | "JobWhereUniqueInput" | "NestedBoolFilter" | "NestedBoolNullableFilter" | "NestedDateTimeFilter" | "NestedDateTimeNullableFilter" | "NestedFloatFilter" | "NestedFloatNullableFilter" | "NestedIntFilter" | "NestedIntNullableFilter" | "NestedStringFilter" | "NestedStringNullableFilter" | "ParkListRelationFilter" | "ParkOrderByInput" | "ParkWhereInput" | "ParkWhereUniqueInput" | "ResortOrderByInput" | "ResortWhereInput" | "ResortWhereUniqueInput" | "RideListRelationFilter" | "RideOrderByInput" | "RideWhereInput" | "RideWhereUniqueInput" | "StringFilter" | "StringNullableFilter" | "UserOrderByInput" | "UserWhereInput" | "UserWhereUniqueInput" | "WaitTimeListRelationFilter" | "WaitTimeOrderByInput" | "WaitTimeWhereInput" | "WaitTimeWhereUniqueInput";
 
-export type NexusGenEnumNames = "OrderByArg" | "RideCategory" | "RideType";
+export type NexusGenEnumNames = "RideCategory" | "RideType" | "SortOrder";
 
 export type NexusGenInterfaceNames = never;
 

@@ -2,9 +2,14 @@
 ### Do not make changes to this file directly
 
 
-input BooleanFilter {
+input BoolFilter {
   equals: Boolean
-  not: Boolean
+  not: NestedBoolFilter
+}
+
+input BoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
 }
 
 scalar DateTime
@@ -16,7 +21,18 @@ input DateTimeFilter {
   in: [DateTime!]
   lt: DateTime
   lte: DateTime
-  not: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
   notIn: [DateTime!]
 }
 
@@ -27,7 +43,18 @@ input FloatFilter {
   in: [Float!]
   lt: Float
   lte: Float
-  not: Float
+  not: NestedFloatFilter
+  notIn: [Float!]
+}
+
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
   notIn: [Float!]
 }
 
@@ -38,7 +65,18 @@ input IntFilter {
   in: [Int!]
   lt: Int
   lte: Int
-  not: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input IntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
   notIn: [Int!]
 }
 
@@ -50,80 +88,118 @@ type Job {
   user: User!
 }
 
-input JobFilter {
+input JobListRelationFilter {
   every: JobWhereInput
   none: JobWhereInput
   some: JobWhereInput
 }
 
 input JobOrderByInput {
-  created: OrderByArg
-  createdAt: OrderByArg
-  endTime: OrderByArg
-  id: OrderByArg
-  startTime: OrderByArg
-  updatedAt: OrderByArg
-  userId: OrderByArg
+  created: SortOrder
+  createdAt: SortOrder
+  endTime: SortOrder
+  id: SortOrder
+  startTime: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
 }
 
 input JobWhereInput {
   AND: [JobWhereInput!]
   created: IntFilter
   createdAt: DateTimeFilter
-  endTime: NullableDateTimeFilter
+  endTime: DateTimeNullableFilter
   id: IntFilter
   NOT: [JobWhereInput!]
   OR: [JobWhereInput!]
   startTime: DateTimeFilter
-  updatedAt: NullableDateTimeFilter
+  updatedAt: DateTimeNullableFilter
   user: UserWhereInput
   userId: IntFilter
-  waitTimes: WaitTimeFilter
+  waitTimes: WaitTimeListRelationFilter
 }
 
 input JobWhereUniqueInput {
   id: Int
 }
 
-input NullableBooleanFilter {
+input NestedBoolFilter {
   equals: Boolean
-  not: Boolean
+  not: NestedBoolFilter
 }
 
-input NullableDateTimeFilter {
+input NestedBoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input NestedDateTimeFilter {
   equals: DateTime
   gt: DateTime
   gte: DateTime
   in: [DateTime!]
   lt: DateTime
   lte: DateTime
-  not: DateTime
+  not: NestedDateTimeFilter
   notIn: [DateTime!]
 }
 
-input NullableFloatFilter {
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input NestedFloatFilter {
   equals: Float
   gt: Float
   gte: Float
   in: [Float!]
   lt: Float
   lte: Float
-  not: Float
+  not: NestedFloatFilter
   notIn: [Float!]
 }
 
-input NullableIntFilter {
+input NestedFloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float!]
+}
+
+input NestedIntFilter {
   equals: Int
   gt: Int
   gte: Int
   in: [Int!]
   lt: Int
   lte: Int
-  not: Int
+  not: NestedIntFilter
   notIn: [Int!]
 }
 
-input NullableStringFilter {
+input NestedIntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+input NestedStringFilter {
   contains: String
   endsWith: String
   equals: String
@@ -132,14 +208,23 @@ input NullableStringFilter {
   in: [String!]
   lt: String
   lte: String
-  not: String
+  not: NestedStringFilter
   notIn: [String!]
   startsWith: String
 }
 
-enum OrderByArg {
-  asc
-  desc
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
 }
 
 type Park {
@@ -153,22 +238,22 @@ type Park {
   timezone: String!
 }
 
-input ParkFilter {
+input ParkListRelationFilter {
   every: ParkWhereInput
   none: ParkWhereInput
   some: ParkWhereInput
 }
 
 input ParkOrderByInput {
-  createdAt: OrderByArg
-  id: OrderByArg
-  latitude: OrderByArg
-  longitude: OrderByArg
-  name: OrderByArg
-  resortId: OrderByArg
-  slug: OrderByArg
-  timezone: OrderByArg
-  updatedAt: OrderByArg
+  createdAt: SortOrder
+  id: SortOrder
+  latitude: SortOrder
+  longitude: SortOrder
+  name: SortOrder
+  resortId: SortOrder
+  slug: SortOrder
+  timezone: SortOrder
+  updatedAt: SortOrder
 }
 
 input ParkWhereInput {
@@ -182,10 +267,10 @@ input ParkWhereInput {
   OR: [ParkWhereInput!]
   resort: ResortWhereInput
   resortId: IntFilter
-  rides: RideFilter
+  rides: RideListRelationFilter
   slug: StringFilter
   timezone: StringFilter
-  updatedAt: NullableDateTimeFilter
+  updatedAt: DateTimeNullableFilter
 }
 
 input ParkWhereUniqueInput {
@@ -197,17 +282,17 @@ type Query {
   getResort(resortSlug: String): Resort!
   getRide(parkSlug: String, resortSlug: String, rideSlug: String): Ride!
   job(where: JobWhereUniqueInput!): Job
-  jobs(orderBy: JobOrderByInput, skip: Int, where: JobWhereInput): [Job!]!
+  jobs(orderBy: [JobOrderByInput!], skip: Int, where: JobWhereInput): [Job!]!
   park(where: ParkWhereUniqueInput!): Park
-  parks(orderBy: ParkOrderByInput, skip: Int, where: ParkWhereInput): [Park!]!
+  parks(orderBy: [ParkOrderByInput!], skip: Int, where: ParkWhereInput): [Park!]!
   resort(where: ResortWhereUniqueInput!): Resort
-  resorts(orderBy: ResortOrderByInput, skip: Int, where: ResortWhereInput): [Resort!]!
+  resorts(orderBy: [ResortOrderByInput!], skip: Int, where: ResortWhereInput): [Resort!]!
   ride(where: RideWhereUniqueInput!): Ride
-  rides(orderBy: RideOrderByInput, skip: Int, where: RideWhereInput): [Ride!]!
+  rides(orderBy: [RideOrderByInput!], skip: Int, where: RideWhereInput): [Ride!]!
   user(where: UserWhereUniqueInput!): User
-  users(orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
+  users(orderBy: [UserOrderByInput!], skip: Int, where: UserWhereInput): [User!]!
   waitTime(where: WaitTimeWhereUniqueInput!): WaitTime
-  waitTimes(orderBy: WaitTimeOrderByInput, skip: Int, where: WaitTimeWhereInput): [WaitTime!]!
+  waitTimes(orderBy: [WaitTimeOrderByInput!], skip: Int, where: WaitTimeWhereInput): [WaitTime!]!
 }
 
 type Resort {
@@ -218,9 +303,9 @@ type Resort {
 }
 
 input ResortOrderByInput {
-  id: OrderByArg
-  name: OrderByArg
-  slug: OrderByArg
+  id: SortOrder
+  name: SortOrder
+  slug: SortOrder
 }
 
 input ResortWhereInput {
@@ -229,7 +314,7 @@ input ResortWhereInput {
   name: StringFilter
   NOT: [ResortWhereInput!]
   OR: [ResortWhereInput!]
-  parks: ParkFilter
+  parks: ParkListRelationFilter
   slug: StringFilter
 }
 
@@ -268,31 +353,31 @@ enum RideCategory {
   WALKTHROUGH
 }
 
-input RideFilter {
+input RideListRelationFilter {
   every: RideWhereInput
   none: RideWhereInput
   some: RideWhereInput
 }
 
 input RideOrderByInput {
-  area: OrderByArg
-  category: OrderByArg
-  createdAt: OrderByArg
-  duration: OrderByArg
-  fastPass: OrderByArg
-  heightRestriction: OrderByArg
-  id: OrderByArg
-  latitude: OrderByArg
-  longId: OrderByArg
-  longitude: OrderByArg
-  name: OrderByArg
-  openedOn: OrderByArg
-  parkId: OrderByArg
-  riderSwap: OrderByArg
-  singleRider: OrderByArg
-  slug: OrderByArg
-  type: OrderByArg
-  updatedAt: OrderByArg
+  area: SortOrder
+  category: SortOrder
+  createdAt: SortOrder
+  duration: SortOrder
+  fastPass: SortOrder
+  heightRestriction: SortOrder
+  id: SortOrder
+  latitude: SortOrder
+  longId: SortOrder
+  longitude: SortOrder
+  name: SortOrder
+  openedOn: SortOrder
+  parkId: SortOrder
+  riderSwap: SortOrder
+  singleRider: SortOrder
+  slug: SortOrder
+  type: SortOrder
+  updatedAt: SortOrder
 }
 
 enum RideType {
@@ -302,32 +387,37 @@ enum RideType {
 
 input RideWhereInput {
   AND: [RideWhereInput!]
-  area: NullableStringFilter
+  area: StringNullableFilter
   category: RideCategory
   createdAt: DateTimeFilter
-  duration: NullableFloatFilter
-  fastPass: NullableBooleanFilter
-  heightRestriction: NullableIntFilter
+  duration: FloatNullableFilter
+  fastPass: BoolNullableFilter
+  heightRestriction: IntNullableFilter
   id: IntFilter
-  latitude: NullableFloatFilter
-  longId: NullableStringFilter
-  longitude: NullableFloatFilter
+  latitude: FloatNullableFilter
+  longId: StringNullableFilter
+  longitude: FloatNullableFilter
   name: StringFilter
   NOT: [RideWhereInput!]
-  openedOn: NullableDateTimeFilter
+  openedOn: DateTimeNullableFilter
   OR: [RideWhereInput!]
   park: ParkWhereInput
   parkId: IntFilter
-  riderSwap: NullableBooleanFilter
-  singleRider: NullableBooleanFilter
+  riderSwap: BoolNullableFilter
+  singleRider: BoolNullableFilter
   slug: StringFilter
   type: RideType
-  updatedAt: NullableDateTimeFilter
-  waitTimes: WaitTimeFilter
+  updatedAt: DateTimeNullableFilter
+  waitTimes: WaitTimeListRelationFilter
 }
 
 input RideWhereUniqueInput {
   id: Int
+}
+
+enum SortOrder {
+  asc
+  desc
 }
 
 input StringFilter {
@@ -339,7 +429,21 @@ input StringFilter {
   in: [String!]
   lt: String
   lte: String
-  not: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
   notIn: [String!]
   startsWith: String
 }
@@ -351,11 +455,11 @@ type User {
 }
 
 input UserOrderByInput {
-  createdAt: OrderByArg
-  email: OrderByArg
-  id: OrderByArg
-  password: OrderByArg
-  updatedAt: OrderByArg
+  createdAt: SortOrder
+  email: SortOrder
+  id: SortOrder
+  password: SortOrder
+  updatedAt: SortOrder
 }
 
 input UserWhereInput {
@@ -363,11 +467,11 @@ input UserWhereInput {
   createdAt: DateTimeFilter
   email: StringFilter
   id: IntFilter
-  jobs: JobFilter
+  jobs: JobListRelationFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   password: StringFilter
-  updatedAt: NullableDateTimeFilter
+  updatedAt: DateTimeNullableFilter
 }
 
 input UserWhereUniqueInput {
@@ -385,26 +489,26 @@ type WaitTime {
   timestamp: DateTime!
 }
 
-input WaitTimeFilter {
+input WaitTimeListRelationFilter {
   every: WaitTimeWhereInput
   none: WaitTimeWhereInput
   some: WaitTimeWhereInput
 }
 
 input WaitTimeOrderByInput {
-  active: OrderByArg
-  amount: OrderByArg
-  createdAt: OrderByArg
-  id: OrderByArg
-  jobId: OrderByArg
-  rideId: OrderByArg
-  status: OrderByArg
-  timestamp: OrderByArg
-  updatedAt: OrderByArg
+  active: SortOrder
+  amount: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  jobId: SortOrder
+  rideId: SortOrder
+  status: SortOrder
+  timestamp: SortOrder
+  updatedAt: SortOrder
 }
 
 input WaitTimeWhereInput {
-  active: BooleanFilter
+  active: BoolFilter
   amount: IntFilter
   AND: [WaitTimeWhereInput!]
   createdAt: DateTimeFilter
@@ -414,10 +518,10 @@ input WaitTimeWhereInput {
   NOT: [WaitTimeWhereInput!]
   OR: [WaitTimeWhereInput!]
   ride: RideWhereInput
-  rideId: NullableIntFilter
+  rideId: IntNullableFilter
   status: StringFilter
   timestamp: DateTimeFilter
-  updatedAt: NullableDateTimeFilter
+  updatedAt: DateTimeNullableFilter
 }
 
 input WaitTimeWhereUniqueInput {
