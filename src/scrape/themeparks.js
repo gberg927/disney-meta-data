@@ -23,7 +23,7 @@ const processWaitTime = async (ride, data) => {
   const waitTime = await prisma.waitTime.create({
     data: {
       timestamp,
-      amount: data.waitTime,
+      amount: data.waitTime || 0,
       active: data.active,
       status: data.status,
       ride:
