@@ -59,6 +59,6 @@
     "graphql": "^15.3.0",
     "nexus": "^0.24.2",
     "nexus-prisma": "^0.14.0",
-    "themeparks": "^5.1.41"
+    "themeparks": "github:cubehouse/themeparks#6prev"
   }
 }
