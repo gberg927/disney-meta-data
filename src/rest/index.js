@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.get('/', async (req, res) => {
-  res.send('Welcome!');
+  res.send('Welcome! Test');
 });
 
 app.use('/api/resorts', resorts);
