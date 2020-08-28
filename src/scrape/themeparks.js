@@ -123,6 +123,7 @@ const processPark = async (park, resortSlug) => {
 
   try {
     const rideTimes = await getParkRideTimes(park, resortSlug);
+    console.log(rideTimes);
     for (const rideTime of rideTimes) {
       const processedWaitTime = await processRide(rideTime);
       processedWaitTimes.push(processedWaitTime);
