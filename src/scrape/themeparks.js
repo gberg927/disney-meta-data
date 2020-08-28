@@ -74,6 +74,7 @@ const processRide = async data => {
 const getParkRideTimes = async (park, resortSlug) => {
   let rideTimes = [];
   const slug = `${resortSlug}-${park.slug}`;
+  console.log(`getParkRideTimes ${slug}`);
   switch (slug) {
     case 'wdw-magic-kingdom':
       rideTimes = await GetWDWMagicKingdomWaitTimes();
