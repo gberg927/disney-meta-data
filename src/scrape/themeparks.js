@@ -89,6 +89,8 @@ const getParkRideTimes = async (park, resortSlug) => {
       rideTimes = await GetWDWAnimalKingdomnWaitTimes();
       break;
     case 'dl-magic-kingdom':
+      console.log('here');
+      console.log(GetDRMagicKingdomWaitTimes());
       rideTimes = await GetDRMagicKingdomWaitTimes();
       break;
     case 'dl-california-adventure':
