@@ -16,7 +16,7 @@ import {
 } from './themeparksapi';
 
 let timestamp = new Date();
-let job = null;
+const job = null;
 let waitTimesCreated = 0;
 
 const processWaitTime = async (ride, data) => {
@@ -122,10 +122,15 @@ const processPark = async (park, resortSlug) => {
   const processedWaitTimes = [];
 
   try {
-    const rideTimes = await getParkRideTimes(park, resortSlug);
-    for (const rideTime of rideTimes) {
-      const processedWaitTime = await processRide(rideTime);
-      processedWaitTimes.push(processedWaitTime);
+    if (resortSlug === 'dl') {
+      const rideTimes = await getParkRideTimes(park, resortSlug);
+      console.log(rideTimes);
+      /*
+      for (const rideTime of rideTimes) {
+        const processedWaitTime = await processRide(rideTime);
+        processedWaitTimes.push(processedWaitTime);
+      }
+      */
     }
   } catch (err) {
     console.error(err);
@@ -144,6 +149,7 @@ const startJob = async user => {
   timestamp = new Date();
   waitTimesCreated = 0;
 
+  /*
   job = await prisma.job.create({
     data: {
       startTime: timestamp,
@@ -154,9 +160,11 @@ const startJob = async user => {
       },
     },
   });
+  */
 };
 
 const endJob = async () => {
+  /*
   job = await prisma.job.update({
     where: { id: job.id },
     data: {
@@ -164,6 +172,7 @@ const endJob = async () => {
       created: waitTimesCreated,
     },
   });
+  */
 };
 
 const processResort = async resort => {
@@ -201,9 +210,9 @@ const processResorts = async user => {
   await endJob();
 
   const processedJob = {
-    status: job.status,
-    startTime: job.timestamp,
-    endTime: job.endTime,
+    // status: job.status,
+    // startTime: job.timestamp,
+    // endTime: job.endTime,
     processedResorts,
   };
   return processedJob;
