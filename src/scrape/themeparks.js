@@ -74,7 +74,6 @@ const processRide = async data => {
 const getParkRideTimes = async (park, resortSlug) => {
   let rideTimes = [];
   const slug = `${resortSlug}-${park.slug}`;
-  console.log(`getParkRideTimes ${slug}`);
   switch (slug) {
     case 'wdw-magic-kingdom':
       rideTimes = await GetWDWMagicKingdomWaitTimes();
@@ -89,9 +88,7 @@ const getParkRideTimes = async (park, resortSlug) => {
       rideTimes = await GetWDWAnimalKingdomnWaitTimes();
       break;
     case 'dl-magic-kingdom':
-      console.log('here');
       rideTimes = await GetDRMagicKingdomWaitTimes();
-      console.log('here2');
       break;
     case 'dl-california-adventure':
       rideTimes = await GetDRCaliforniaAdventureWaitTimes();
@@ -126,7 +123,6 @@ const processPark = async (park, resortSlug) => {
 
   try {
     const rideTimes = await getParkRideTimes(park, resortSlug);
-    console.log(rideTimes);
     for (const rideTime of rideTimes) {
       const processedWaitTime = await processRide(rideTime);
       processedWaitTimes.push(processedWaitTime);
