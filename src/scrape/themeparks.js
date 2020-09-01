@@ -32,7 +32,7 @@ const processWaitTime = async (ride, data) => {
             id: ride.id,
           },
         }) ||
-        null,
+        undefined,
       job: {
         connect: {
           id: job.id,
