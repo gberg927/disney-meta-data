@@ -122,12 +122,10 @@ const processPark = async (park, resortSlug) => {
   const processedWaitTimes = [];
 
   try {
-    if (resortSlug === 'dl') {
-      const rideTimes = await getParkRideTimes(park, resortSlug);
-      for (const rideTime of rideTimes) {
-        const processedWaitTime = await processRide(rideTime);
-        processedWaitTimes.push(processedWaitTime);
-      }
+    const rideTimes = await getParkRideTimes(park, resortSlug);
+    for (const rideTime of rideTimes) {
+      const processedWaitTime = await processRide(rideTime);
+      processedWaitTimes.push(processedWaitTime);
     }
   } catch (err) {
     console.error(err);
