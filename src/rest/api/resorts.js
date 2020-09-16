@@ -19,4 +19,16 @@ resorts.get('/:id', async (req, res) => {
   res.status(200).json({ resort: rtnResorts });
 });
 
+resorts.get('/:id/parks', async (req, res) => {
+  const id = parseInt(req.params.id);
+  const rtnParks = await prisma.park.findMany({
+    where: {
+      resort: {
+        id,
+      },
+    },
+  });
+  res.status(200).json({ parks: rtnParks });
+});
+
 export { resorts };
