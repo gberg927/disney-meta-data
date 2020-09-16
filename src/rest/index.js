@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { resorts, scrape } from './api';
+import { resorts, parks, rides, scrape } from './api';
 
 require('dotenv').config({ path: 'src/config/variables.env' });
 
@@ -16,6 +16,9 @@ app.get('/', async (req, res) => {
 });
 
 app.use('/api/resorts', resorts);
+app.use('/api/parks', parks);
+app.use('/api/resorts', resorts);
+app.use('/api/rides', rides);
 app.use('/api/scrape', scrape);
 
 export default app;
