@@ -97,6 +97,7 @@ const Park = objectType({
     t.model.id();
     t.model.name();
     t.model.slug();
+    t.model.abbreviation();
     t.model.latitude();
     t.model.longitude();
     t.model.timezone();
@@ -111,6 +112,7 @@ const Resort = objectType({
     t.model.id();
     t.model.name();
     t.model.slug();
+    t.model.abbreviation();
     t.model.parks();
   },
 });
