@@ -228,6 +228,7 @@ input NestedStringNullableFilter {
 }
 
 type Park {
+  abbreviation: String!
   id: Int!
   latitude: Float!
   longitude: Float!
@@ -245,6 +246,7 @@ input ParkListRelationFilter {
 }
 
 input ParkOrderByInput {
+  abbreviation: SortOrder
   createdAt: SortOrder
   id: SortOrder
   latitude: SortOrder
@@ -257,6 +259,7 @@ input ParkOrderByInput {
 }
 
 input ParkWhereInput {
+  abbreviation: StringFilter
   AND: [ParkWhereInput!]
   createdAt: DateTimeFilter
   id: IntFilter
@@ -296,6 +299,7 @@ type Query {
 }
 
 type Resort {
+  abbreviation: String!
   id: Int!
   name: String!
   parks(skip: Int): [Park!]!
@@ -303,12 +307,14 @@ type Resort {
 }
 
 input ResortOrderByInput {
+  abbreviation: SortOrder
   id: SortOrder
   name: SortOrder
   slug: SortOrder
 }
 
 input ResortWhereInput {
+  abbreviation: StringFilter
   AND: [ResortWhereInput!]
   id: IntFilter
   name: StringFilter

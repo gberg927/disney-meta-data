@@ -49,6 +49,9 @@ rides.get('/:id/waittimes', async (req, res) => {
         gte: subMinutes(new Date(), 1454),
       },
     },
+    orderBy: {
+      timestamp: 'desc',
+    },
   });
   res.status(200).json({ waitTimes: rtnWaitTimes });
 });

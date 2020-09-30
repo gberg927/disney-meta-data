@@ -218,6 +218,7 @@ export interface NexusGenInputs {
     some?: NexusGenInputs['ParkWhereInput'] | null; // ParkWhereInput
   }
   ParkOrderByInput: { // input type
+    abbreviation?: NexusGenEnums['SortOrder'] | null; // SortOrder
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     latitude?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -229,6 +230,7 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   ParkWhereInput: { // input type
+    abbreviation?: NexusGenInputs['StringFilter'] | null; // StringFilter
     AND?: NexusGenInputs['ParkWhereInput'][] | null; // [ParkWhereInput!]
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
@@ -248,11 +250,13 @@ export interface NexusGenInputs {
     id?: number | null; // Int
   }
   ResortOrderByInput: { // input type
+    abbreviation?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     name?: NexusGenEnums['SortOrder'] | null; // SortOrder
     slug?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   ResortWhereInput: { // input type
+    abbreviation?: NexusGenInputs['StringFilter'] | null; // StringFilter
     AND?: NexusGenInputs['ResortWhereInput'][] | null; // [ResortWhereInput!]
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -416,6 +420,7 @@ export interface NexusGenRootTypes {
     startTime: any; // DateTime!
   }
   Park: { // root type
+    abbreviation: string; // String!
     id: number; // Int!
     latitude: number; // Float!
     longitude: number; // Float!
@@ -425,6 +430,7 @@ export interface NexusGenRootTypes {
   }
   Query: {};
   Resort: { // root type
+    abbreviation: string; // String!
     id: number; // Int!
     name: string; // String!
     slug: string; // String!
@@ -522,6 +528,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Park: { // field return type
+    abbreviation: string; // String!
     id: number; // Int!
     latitude: number; // Float!
     longitude: number; // Float!
@@ -549,6 +556,7 @@ export interface NexusGenFieldTypes {
     waitTimes: NexusGenRootTypes['WaitTime'][]; // [WaitTime!]!
   }
   Resort: { // field return type
+    abbreviation: string; // String!
     id: number; // Int!
     name: string; // String!
     parks: NexusGenRootTypes['Park'][]; // [Park!]!

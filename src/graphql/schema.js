@@ -86,6 +86,9 @@ const Ride = objectType({
               gte: subMinutes(new Date(), 1454),
             },
           },
+          orderBy: {
+            timestamp: 'desc',
+          },
         }),
     });
   },
