@@ -1,5 +1,6 @@
 import prisma from '../prisma';
 
+/*
 import {
   GetWDWMagicKingdomWaitTimes,
   GetWDWEpcotWaitTimes,
@@ -14,6 +15,7 @@ import {
   GetTDRMagicKingdomWaitTimes,
   GetTDRDisneySeaWaitTimes,
 } from './themeparksapi';
+
 
 let timestamp = new Date();
 let job = null;
@@ -59,7 +61,7 @@ const processWaitTime = async (ride, data) => {
   return processedWaitTime;
 };
 
-const processRide = async data => {
+const processRide = async (data) => {
   const rides = await prisma.ride.findMany({
     where: {
       longId: data.id,
@@ -140,7 +142,7 @@ const processPark = async (park, resortSlug) => {
   return processedPark;
 };
 
-const startJob = async user => {
+const startJob = async (user) => {
   timestamp = new Date();
   waitTimesCreated = 0;
 
@@ -166,7 +168,7 @@ const endJob = async () => {
   });
 };
 
-const processResort = async resort => {
+const processResort = async (resort) => {
   console.log(`Resort: ${resort.slug}`);
   const processedParks = [];
 
@@ -183,8 +185,10 @@ const processResort = async resort => {
   };
   return processedResort;
 };
+*/
 
-const processResorts = async user => {
+const processResorts = async (user) => {
+  /*
   console.log(`Processing Resorts: ${timestamp}`);
   const processedResorts = [];
   const resorts = await prisma.resort.findMany({
@@ -207,6 +211,7 @@ const processResorts = async user => {
     processedResorts,
   };
   return processedJob;
+  */
 };
 
 export default processResorts;

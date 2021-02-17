@@ -1,7 +1,2 @@
 node_modules/
 *.env*
-
-themeparks.db
-themeparks.db-journal
-
-.vscode/

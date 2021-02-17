@@ -1,4 +1,4 @@
-import { nexusPrismaPlugin } from 'nexus-prisma';
+import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema';
 import { makeSchema, objectType, stringArg } from '@nexus/schema';
 import { subMinutes } from 'date-fns';
 
@@ -72,7 +72,7 @@ const Ride = objectType({
             },
             take: 1,
           })
-          .then(_ => _[0]),
+          .then((_) => _[0]),
     });
     t.list.field('waitTimes', {
       type: WaitTime,
@@ -170,7 +170,7 @@ const Query = objectType({
             },
             take: 1,
           })
-          .then(_ => _[0]),
+          .then((_) => _[0]),
     });
     t.field('getPark', {
       type: 'Park',
@@ -189,7 +189,7 @@ const Query = objectType({
             },
             take: 1,
           })
-          .then(_ => _[0]),
+          .then((_) => _[0]),
     });
     t.field('getRide', {
       type: 'Ride',
@@ -212,14 +212,14 @@ const Query = objectType({
             },
             take: 1,
           })
-          .then(_ => _[0]),
+          .then((_) => _[0]),
     });
   },
 });
 
 const schema = makeSchema({
   types: [User, Job, WaitTime, Ride, Park, Resort, Query],
-  plugins: [nexusPrismaPlugin()],
+  plugins: [nexusSchemaPrisma()],
   outputs: {
     schema: `${__dirname}/schema.graphql`,
     typegen: `${__dirname}/generated/nexus.ts`,

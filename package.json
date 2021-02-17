@@ -5,8 +5,7 @@
   "scripts": {
     "build": "prisma generate",
     "dev": "nodemon ./src/index.js --exec babel-node ./src/index.js",
-    "start": "babel-node ./src/index.js",
-    "test": ""
+    "start": "babel-node ./src/index.js"
   },
   "author": "Dennis Glasberg <dennis.glasberg@gmail.com>",
   "license": "ISC",
@@ -14,21 +13,24 @@
     "type": "git",
     "url": "https://github.com/gberg927/disney-metadata-backend.git"
   },
-  "devDependencies": {
-    "@prisma/cli": "^2.5.1",
-    "babel-eslint": "^9.0.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-config-wesbos": "0.0.19",
-    "eslint-plugin-html": "^5.0.5",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.20.6",
-    "eslint-plugin-react-hooks": "^1.7.0",
-    "nodemon": "^2.0.4",
-    "prettier": "^1.19.1"
+  "dependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/node": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@nexus/schema": "^0.20.1",
+    "apollo-server-express": "^2.21.0",
+    "babel-loader": "^8.1.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "date-fns": "^2.17.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nexus": "^1.0.0",
+    "nexus-plugin-prisma": "^0.30.0",
+    "prisma": "^2.17.0",
+    "slugify": "^1.4.0"
   },
   "babel": {
     "presets": [
@@ -40,25 +42,18 @@
       "wesbos"
     ]
   },
-  "dependencies": {
-    "@babel/cli": "^7.11.5",
-    "@babel/core": "^7.11.5",
-    "@babel/node": "^7.10.4",
-    "@babel/preset-env": "^7.11.5",
-    "@nexus/schema": "^0.14.0",
-    "@prisma/client": "^2.5.1",
-    "apollo-server": "^2.15.1",
-    "apollo-server-express": "^2.15.1",
-    "babel-loader": "^8.1.0",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "date-fns": "^2.16.1",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "graphql": "^15.3.0",
-    "nexus": "^0.24.2",
-    "nexus-prisma": "^0.14.0",
-    "themeparks": "github:cubehouse/themeparks#6prev"
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-wesbos": "^1.0.1",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.2.1"
   }
 }

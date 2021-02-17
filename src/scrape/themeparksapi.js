@@ -1,3 +1,4 @@
+/*
 const Themeparks = require('themeparks');
 
 const WDWMagicKingdom = new Themeparks.Parks.WaltDisneyWorldMagicKingdom();
@@ -45,3 +46,4 @@ export const GetTDRMagicKingdomWaitTimes = async () =>
   TDRMagicKingdom.GetWaitTimes();
 
 export const GetTDRDisneySeaWaitTimes = async () => TDRDisneySea.GetWaitTimes();
+*/
