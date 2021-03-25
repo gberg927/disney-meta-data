@@ -23,7 +23,7 @@ const writePoints = async (points) => {
 
 const getJobWaitTimes = async (startTime) => {
   const unixTimestamp = startTime.getTime() / 1000;
-  const fluxQuery = `from(bucket: "wdw-metadata-backend")
+  const fluxQuery = `from(bucket: "${process.env.INFLUXDB_BUCKET}")
   |> range(start: ${unixTimestamp}, stop: ${unixTimestamp + 1})
   |> filter(fn: (r) => r["_measurement"] == "waittime")
   |> filter(fn: (r) => r["_field"] == "amount")
@@ -34,7 +34,7 @@ const getJobWaitTimes = async (startTime) => {
 };
 
 const getParkRideWaitTimes = async (parkId) => {
-  const fluxQuery = `from(bucket: "wdw-metadata-backend")
+  const fluxQuery = `from(bucket: "${process.env.INFLUXDB_BUCKET}")
   |> range(start: 0, stop: now())
   |> filter(fn: (r) => r["_measurement"] == "waittime")
   |> filter(fn: (r) => r["_field"] == "amount")
@@ -47,7 +47,7 @@ const getParkRideWaitTimes = async (parkId) => {
 };
 
 const getRideWaitTime = async (rideId) => {
-  const fluxQuery = `from(bucket: "wdw-metadata-backend")
+  const fluxQuery = `from(bucket: "${process.env.INFLUXDB_BUCKET}")
   |> range(start: 0, stop: now())
   |> filter(fn: (r) => r["_measurement"] == "waittime")
   |> filter(fn: (r) => r["_field"] == "amount")
@@ -60,7 +60,7 @@ const getRideWaitTime = async (rideId) => {
 };
 
 const getRideWaitTimes = async (rideId) => {
-  const fluxQuery = `from(bucket: "wdw-metadata-backend")
+  const fluxQuery = `from(bucket: "${process.env.INFLUXDB_BUCKET}")
   |> range(start: -7d, stop: now())
   |> filter(fn: (r) => r["_measurement"] == "waittime")
   |> filter(fn: (r) => r["_field"] == "amount")
