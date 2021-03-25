@@ -27,7 +27,8 @@ const getJobWaitTimes = async (startTime) => {
   |> range(start: ${unixTimestamp}, stop: ${unixTimestamp + 1})
   |> filter(fn: (r) => r["_measurement"] == "waittime")
   |> filter(fn: (r) => r["_field"] == "amount")
-  |> sort(columns: ["rideId"], desc: true)`;
+  |> sort(columns: ["rideId"], desc: true)
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")`;
 
   const data = await queryApi.collectRows(fluxQuery);
   return data || null;
@@ -37,10 +38,11 @@ const getParkRideWaitTimes = async (parkId) => {
   const fluxQuery = `from(bucket: "${process.env.INFLUXDB_BUCKET}")
   |> range(start: 0, stop: now())
   |> filter(fn: (r) => r["_measurement"] == "waittime")
-  |> filter(fn: (r) => r["_field"] == "amount")
+  |> filter(fn: (r) => r["_field"] == "active" or r["_field"] == "amount" or r["_field"] == "status")
   |> filter(fn: (r) => r["parkId"] == "${parkId}")
   |> sort(columns: ["_time"], desc: false)
-  |> last(column: "_time")`;
+  |> last(column: "_time")
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")`;
 
   const data = await queryApi.collectRows(fluxQuery);
   return data || null;
@@ -50,10 +52,10 @@ const getRideWaitTime = async (rideId) => {
   const fluxQuery = `from(bucket: "${process.env.INFLUXDB_BUCKET}")
   |> range(start: 0, stop: now())
   |> filter(fn: (r) => r["_measurement"] == "waittime")
-  |> filter(fn: (r) => r["_field"] == "amount")
+  |> filter(fn: (r) => r["_field"] == "active" or r["_field"] == "amount" or r["_field"] == "status")
   |> filter(fn: (r) => r["rideId"] == "${rideId}")
-  |> sort(columns: ["_time"], desc: false)
-  |> last(column: "_time")`;
+  |> last(column: "_time")
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")`;
 
   const data = await queryApi.collectRows(fluxQuery);
   return (data && data[0]) || null;

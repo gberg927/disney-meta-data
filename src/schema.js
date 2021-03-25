@@ -69,9 +69,9 @@ const Job = objectType({
           parkIdId: waitTime.parkIdId,
           rideIdId: waitTime.rideIdId,
           timestamp: waitTime._time,
-          amount: waitTime._value,
-          active: 1,
-          status: 'active',
+          amount: waitTime.amount,
+          active: waitTime.active,
+          status: waitTime.status,
         }));
       },
     });
@@ -107,9 +107,9 @@ const Ride = objectType({
             parkIdId: data.parkIdId,
             rideIdId: data.rideIdId,
             timestamp: data._time,
-            amount: data._value,
-            active: 1,
-            status: 'active',
+            amount: data.amount,
+            active: data.active,
+            status: data.status,
           }) ||
           null
         );
@@ -124,9 +124,9 @@ const Ride = objectType({
           parkIdId: waitTime.parkIdId,
           rideIdId: waitTime.rideIdId,
           timestamp: waitTime._time,
-          amount: waitTime._value,
-          active: 1,
-          status: 'active',
+          amount: waitTime.amount,
+          active: waitTime.active,
+          status: waitTime.status,
         }));
       },
     });
