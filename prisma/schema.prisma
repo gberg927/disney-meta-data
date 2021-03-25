@@ -1,36 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now()) @db.DateTime(0)
+  updatedAt DateTime?
+  jobs      Job[]
+}
+
+model Job {
+  id        Int        @id @default(autoincrement())
+  userId    Int
+  startTime DateTime
+  endTime   DateTime?
+  created   Int        @default(0)
+  createdAt DateTime   @default(now()) @db.DateTime(0)
+  updatedAt DateTime?
+  user      User       @relation(fields: [userId], references: [id])
+  waitTimes WaitTime[]
+
+  @@index([userId], name: "FK_JobUser")
 }
 
 model Resort {
   id           Int    @id @default(autoincrement())
-  name         String
-  slug         String
-  abbreviation String @default("abbr")
+  name         String @db.VarChar(255)
+  slug         String @db.VarChar(255)
+  abbreviation String @default("abbr") @db.VarChar(255)
   parks        Park[]
 }
 
 model Park {
   id           Int       @id @default(autoincrement())
-  name         String
-  slug         String
-  abbreviation String    @default("abbr")
-  latitude     Float
-  longitude    Float
-  timezone     String
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime? @updatedAt
-  resort       Resort    @relation(fields: [resortId], references: [id])
+  longId       String    @db.VarChar(255)
+  name         String    @db.VarChar(255)
+  slug         String    @db.VarChar(255)
+  abbreviation String    @default("abbr") @db.VarChar(255)
+  latitude     Decimal
+  longitude    Decimal
+  timezone     String    @db.VarChar(255)
   resortId     Int
+  createdAt    DateTime  @default(now()) @db.DateTime(0)
+  updatedAt    DateTime?
+  resort       Resort    @relation(fields: [resortId], references: [id])
   rides        Ride[]
+
+  @@index([resortId], name: "FK_Park_Resort")
 }
 
-enum RideCategory {
+model Ride {
+  id                Int            @id @default(autoincrement())
+  longId            String?        @db.VarChar(255)
+  name              String         @db.VarChar(255)
+  slug              String         @db.VarChar(255)
+  area              String?        @db.VarChar(255)
+  type              Ride_type?
+  category          Ride_category?
+  openedOn          DateTime?
+  duration          Decimal?
+  fastPass          Boolean?
+  heightRestriction Int?
+  riderSwap         Boolean?
+  singleRider       Boolean?
+  latitude          Decimal?
+  longitude         Decimal?
+  parkId            Int
+  createdAt         DateTime       @default(now()) @db.DateTime(0)
+  updatedAt         DateTime?
+  park              Park           @relation(fields: [parkId], references: [id])
+  waitTimes         WaitTime[]
+
+  @@index([parkId], name: "FK_RidePark")
+}
+
+model WaitTime {
+  id        Int       @id @default(autoincrement())
+  timestamp DateTime
+  active    Boolean
+  status    String    @db.VarChar(255)
+  amount    Int
+  rideId    Int?
+  jobId     Int
+  createdAt DateTime  @default(now()) @db.DateTime(0)
+  updatedAt DateTime?
+  job       Job       @relation(fields: [jobId], references: [id])
+  ride      Ride?     @relation(fields: [rideId], references: [id])
+
+  @@index([jobId], name: "FK_WaitTimeJob")
+  @@index([rideId], name: "FK_WaitTimeRide")
+}
+
+enum Ride_type {
+  ATTRACTION
+  ENTERTAINMENT
+}
+
+enum Ride_category {
   ARCADE
   CHARACTER_MEET
   PLAY_AREA
@@ -38,67 +111,4 @@ enum RideCategory {
   SHOW_CONTINUOUS
   SHOW_SCHEDULED
   WALKTHROUGH
-}
-
-enum RideType {
-  ATTRACTION
-  ENTERTAINMENT
-}
-
-model Ride {
-  id                Int           @id @default(autoincrement())
-  name              String
-  slug              String
-  longId            String?
-  category          RideCategory?
-  type              RideType?
-  longitude         Float?
-  latitude          Float?
-  area              String?
-  openedOn          DateTime?
-  heightRestriction Int?
-  duration          Float?
-  fastPass          Boolean?
-  singleRider       Boolean?
-  riderSwap         Boolean?
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime?     @updatedAt
-  park              Park          @relation(fields: [parkId], references: [id])
-  parkId            Int
-  waitTimes         WaitTime[]
-}
-
-model WaitTime {
-  id        Int       @id @default(autoincrement())
-  timestamp DateTime
-  amount    Int
-  active    Boolean
-  status    String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-  ride      Ride?     @relation(fields: [rideId], references: [id])
-  rideId    Int?
-  job       Job       @relation(fields: [jobId], references: [id])
-  jobId     Int
-}
-
-model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  password  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-  jobs      Job[]
-}
-
-model Job {
-  id        Int        @id @default(autoincrement())
-  startTime DateTime
-  endTime   DateTime?
-  created   Int        @default(0)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime?  @updatedAt
-  user      User       @relation(fields: [userId], references: [id])
-  userId    Int
-  waitTimes WaitTime[]
 }
