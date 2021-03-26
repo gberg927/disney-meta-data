@@ -12,7 +12,13 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 5000;
 
-const corsOptions = { origin: process.env.FRONTEND_URL, credentials: true };
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'https://disney-metadata-frontend.vercel.app',
+  ],
+  credentials: true,
+};
 
 const app = express();
 app.use(cors(corsOptions));
