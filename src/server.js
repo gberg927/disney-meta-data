@@ -16,7 +16,7 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'https://disney-metadata-frontend.vercel.app',
-    'https://themeparkstats.com/',
+    'https://themeparkstats.com',
   ],
   credentials: true,
 };
