@@ -2,11 +2,6 @@
 ### Do not make changes to this file directly
 
 
-input BoolFilter {
-  equals: Boolean
-  not: NestedBoolFilter
-}
-
 input BoolNullableFilter {
   equals: Boolean
   not: NestedBoolNullableFilter
@@ -156,11 +151,6 @@ type LogoutPayload {
 type Mutation {
   login(data: LoginInput!): User!
   logout: LogoutPayload!
-}
-
-input NestedBoolFilter {
-  equals: Boolean
-  not: NestedBoolFilter
 }
 
 input NestedBoolNullableFilter {
@@ -334,9 +324,6 @@ input ParkWhereUniqueInput {
 
 type Query {
   currentUser: User
-  getPark(parkSlug: String, resortSlug: String): Park
-  getResort(resortSlug: String): Resort
-  getRide(parkSlug: String, resortSlug: String, rideSlug: String): Ride
   job(where: JobWhereUniqueInput!): Job
   jobs(after: JobWhereUniqueInput, before: JobWhereUniqueInput, first: Int, last: Int, orderBy: [JobOrderByInput!], where: JobWhereInput): [Job!]!
   park(where: ParkWhereUniqueInput!): Park
@@ -347,6 +334,7 @@ type Query {
   rides(after: RideWhereUniqueInput, before: RideWhereUniqueInput, first: Int, last: Int, orderBy: [RideOrderByInput!], where: RideWhereInput): [Ride!]!
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): [User!]!
+  waitTimes(where: WaitTimeWhereInput): [WaitTime]
 }
 
 type Resort {
@@ -397,7 +385,6 @@ type Ride {
   slug: String!
   type: Ride_type
   waitTime: WaitTime
-  waitTimes: [WaitTime]
 }
 
 input RideListRelationFilter {
@@ -540,9 +527,9 @@ input UserWhereUniqueInput {
 type WaitTime {
   active: Boolean!
   amount: Int!
-  parkIdId: Int!
+  parkId: Int!
   resortId: Int!
-  rideIdId: Int!
+  rideId: Int!
   status: String!
   timestamp: DateTime!
 }
@@ -554,18 +541,7 @@ input WaitTimeListRelationFilter {
 }
 
 input WaitTimeWhereInput {
-  AND: [WaitTimeWhereInput!]
-  NOT: [WaitTimeWhereInput!]
-  OR: [WaitTimeWhereInput!]
-  active: BoolFilter
-  amount: IntFilter
-  createdAt: DateTimeFilter
-  id: IntFilter
-  job: JobWhereInput
-  jobId: IntFilter
-  ride: RideWhereInput
-  rideId: IntNullableFilter
-  status: StringFilter
-  timestamp: DateTimeFilter
-  updatedAt: DateTimeNullableFilter
+  endDate: DateTime
+  rideId: Int
+  startDate: DateTime
 }

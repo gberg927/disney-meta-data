@@ -4,7 +4,6 @@ import {
   makeSchema,
   nonNull,
   objectType,
-  stringArg,
   asNexusMethod,
 } from 'nexus';
 import { nexusPrisma } from 'nexus-plugin-prisma';
@@ -30,12 +29,21 @@ const LogoutPayload = objectType({
   },
 });
 
+const WaitTimeWhereInput = inputObjectType({
+  name: 'WaitTimeWhereInput',
+  definition(t) {
+    t.int('rideId');
+    t.datetime('startDate');
+    t.datetime('endDate');
+  },
+});
+
 const WaitTime = objectType({
   name: 'WaitTime',
   definition(t) {
     t.nonNull.int('resortId');
-    t.nonNull.int('parkIdId');
-    t.nonNull.int('rideIdId');
+    t.nonNull.int('parkId');
+    t.nonNull.int('rideId');
     t.nonNull.datetime('timestamp');
     t.nonNull.int('amount');
     t.nonNull.boolean('active');
@@ -66,8 +74,8 @@ const Job = objectType({
         const data = await getJobWaitTimes(root.startTime);
         return data.map((waitTime) => ({
           resortId: waitTime.resortId,
-          parkIdId: waitTime.parkIdId,
-          rideIdId: waitTime.rideIdId,
+          parkId: waitTime.parkId,
+          rideId: waitTime.rideId,
           timestamp: waitTime._time,
           amount: waitTime.amount,
           active: waitTime.active,
@@ -104,8 +112,8 @@ const Ride = objectType({
         return (
           (data && {
             resortId: data.resortId,
-            parkIdId: data.parkIdId,
-            rideIdId: data.rideIdId,
+            parkId: data.parkId,
+            rideId: data.rideId,
             timestamp: data._time,
             amount: data.amount,
             active: data.active,
@@ -113,21 +121,6 @@ const Ride = objectType({
           }) ||
           null
         );
-      },
-    });
-    t.list.field('waitTimes', {
-      type: WaitTime,
-      resolve: async (root) => {
-        const data = await getRideWaitTimes(root.id);
-        return data.map((waitTime) => ({
-          resortId: waitTime.resortId,
-          parkIdId: waitTime.parkIdId,
-          rideIdId: waitTime.rideIdId,
-          timestamp: waitTime._time,
-          amount: waitTime.amount,
-          active: waitTime.active,
-          status: waitTime.status,
-        }));
       },
     });
   },
@@ -192,60 +185,26 @@ const Query = objectType({
       ordering: true,
       pagination: true,
     });
-    t.field('getResort', {
-      type: 'Resort',
-      args: { resortSlug: stringArg('resort slug') },
-      resolve: (root, args, ctx) =>
-        ctx.prisma.resort
-          .findMany({
-            where: {
-              slug: args.resortSlug,
-            },
-            take: 1,
-          })
-          .then((_) => _[0]),
-    });
-    t.field('getPark', {
-      type: 'Park',
+    t.list.field('waitTimes', {
+      type: WaitTime,
       args: {
-        resortSlug: stringArg('resort slug'),
-        parkSlug: stringArg('park slug'),
+        where: arg({
+          type: 'WaitTimeWhereInput',
+        }),
       },
-      resolve: (root, args, ctx) =>
-        ctx.prisma.park
-          .findMany({
-            where: {
-              slug: args.parkSlug,
-              resort: {
-                slug: args.resortSlug,
-              },
-            },
-            take: 1,
-          })
-          .then((_) => _[0]),
-    });
-    t.field('getRide', {
-      type: 'Ride',
-      args: {
-        resortSlug: stringArg('resort slug'),
-        parkSlug: stringArg('park slug'),
-        rideSlug: stringArg('park slug'),
+      resolve: async (root, args) => {
+        const { rideId, startDate, endDate } = args.where;
+        const data = await getRideWaitTimes(rideId, startDate, endDate);
+        return data.map((waitTime) => ({
+          resortId: waitTime.resortId,
+          parkId: waitTime.parkId,
+          rideId: waitTime.rideId,
+          timestamp: waitTime._time,
+          amount: waitTime.amount,
+          active: waitTime.active,
+          status: waitTime.status,
+        }));
       },
-      resolve: (root, args, ctx) =>
-        ctx.prisma.ride
-          .findMany({
-            where: {
-              slug: args.rideSlug,
-              park: {
-                slug: args.parkSlug,
-                resort: {
-                  slug: args.resortSlug,
-                },
-              },
-            },
-            take: 1,
-          })
-          .then((_) => _[0]),
     });
     t.field('currentUser', {
       type: 'User',
@@ -325,6 +284,7 @@ const schema = makeSchema({
     LoginInput,
     LogoutPayload,
     GQLDate,
+    WaitTimeWhereInput,
   ],
   plugins: [nexusPrisma({ experimentalCRUD: true })],
   outputs: {
