@@ -137,7 +137,11 @@ const Park = objectType({
     t.model.longitude();
     t.model.timezone();
     t.model.resort();
-    t.model.rides();
+    t.model.rides({
+      filtering: true,
+      ordering: true,
+      pagination: true,
+    });
   },
 });
 

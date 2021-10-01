@@ -273,7 +273,7 @@ type Park {
   longitude: Decimal!
   name: String!
   resort: Resort!
-  rides(after: RideWhereUniqueInput, before: RideWhereUniqueInput, first: Int, last: Int): [Ride!]!
+  rides(after: RideWhereUniqueInput, before: RideWhereUniqueInput, first: Int, last: Int, orderBy: [RideOrderByInput!], where: RideWhereInput): [Ride!]!
   slug: String!
   timezone: String!
 }
